@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "payfood_app_mob",
+    "slug": "payfood_app_mob",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logopayfood.svg",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/logopayfood.svg",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logopayfood.svg",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/logopayfood.svg"
+    }
+  }
+}
