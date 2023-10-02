@@ -17,7 +17,7 @@ export default function WalletPage() {
         <Text style={styles.text2}>Food Coins</Text>
       </View>
       <View style={styles.main1}>
-        <Text style={styles}>Recharger vos Food Coins</Text>
+        <Text style={styles.text3}>Recharger vos Food Coins</Text>
       </View>
       <View>
         <TouchableOpacity style={styles.button}>
@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
     color: "black",
     marginTop: 10,
     marginLeft: 25,
+  },
+  text3: {
+    opacity: 0.5,
   },
   main: {
     marginTop: 20,
