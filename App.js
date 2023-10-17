@@ -1,16 +1,13 @@
 import React from 'react';
 import { store } from "./src/redux/store";
 import { Provider } from "react-redux";
-// import AppNavigator from './src/navigation/AppNavigator'
-import MainTabNavigator from './src/navigation/MainTabNavigator';
-// import HomeNavigator from './src/navigation/HomeNavigator';
+import AppNavigator from './src/navigation/AppNavigator'
+
 
 export default function App() {
   return (
     <Provider store={store}>
-      {/* <AppNavigator /> */}
-      {/* <HomeNavigator/> */}
-      <MainTabNavigator/>
+      <AppNavigator />
     </Provider>
   );
 }
