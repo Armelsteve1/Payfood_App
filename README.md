@@ -1,5 +1,6 @@
 # Payfood_App
 
+
 ### Tools and technology
 - react-native
 - Stripe payment checkout
@@ -20,3 +21,4 @@
 - Google places
 - Yelp
 - Stripe payment
+
