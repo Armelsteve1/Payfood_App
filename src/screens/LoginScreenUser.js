@@ -69,7 +69,7 @@ function LoginScreenUser({ navigation }) {
         <Text style={styles.join}>
           Not a member?{" "}
           <Text
-            onPress={() => navigation.navigate("Signup")}
+            onPress={() => navigation.navigate("SignUpScreen")}
             style={{ color: colors.primary }}
           >
             Sign Up

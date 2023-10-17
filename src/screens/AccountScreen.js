@@ -8,9 +8,31 @@ import { selectUser } from '../redux/slices/authSlice'
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from '../configs/firebase'
+import { useNavigation } from '@react-navigation/native';
 
 const AccountScreen = () => {
+
     const user = useSelector(selectUser)
+
+    console.log('auth', auth);
+    console.log('user', user);
+
+    const navigation = useNavigation();
+
+    // const handleSignOut = () => {
+    //     auth
+    //         .signOut()
+    //         .then(() => {
+    //             navigation.navigate('LoginScreenUser');
+    //         })
+    //         .catch((error) => {
+    //             console.error('Sign-out error:', error);
+    //         });
+    // };
+
+    const handleSignOut = () => {
+        navigation.navigate('LoginScreenUser');
+    };
 
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
@@ -37,7 +59,7 @@ const AccountScreen = () => {
             </View>
             <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
                 <Text style={tailwind`text-gray-800 mt-2 text-lg`}>Other options</Text>
-                <TouchableOpacity onPress={() => auth.signOut()}>
+                <TouchableOpacity onPress={handleSignOut}>
                     <Text style={tailwind`text-green-900 mt-2`}>Sign out</Text>
                 </TouchableOpacity>
             </View>

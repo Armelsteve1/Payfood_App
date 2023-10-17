@@ -10,6 +10,8 @@ import BrowseScreen from '../screens/BrowseScreen';
 import CartScreen from '../screens/CartScreen';
 import GroceryScreen from '../screens/GroceryScreen';
 import AccountScreen from '../screens/AccountScreen';
+import AccountStack from '../screens/AccountStack';
+
 
 const Tab = createBottomTabNavigator()
 
@@ -54,7 +56,7 @@ const MainTabNavigator = () => {
                     )
                 }}
             />
-            <Tab.Screen name="Account" component={AccountScreen}
+            <Tab.Screen name="Account" component={AccountStack}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Feather name="user" color={color} size={size} />

@@ -90,10 +90,10 @@ function SignupScreen({ navigation }) {
         <Text style={styles.join}>
           Already a member?{" "}
           <Text
-            onPress={() => navigation.navigate("UserLogin")}
+            onPress={() => navigation.navigate("LoginScreenUser")}
             style={{ color: colors.primary }}
           >
-            Logn In
+            Log In
           </Text>
         </Text>
       </View>
