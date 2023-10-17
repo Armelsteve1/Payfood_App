@@ -4,10 +4,10 @@
     "slug": "payfood_app_mob",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logopayfood.svg",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logopayfood.svg",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,12 +17,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logopayfood.svg",
+        "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/logopayfood.svg"
+      "favicon": "./assets/logo.png"
     }
   }
 }
