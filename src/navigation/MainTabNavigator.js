@@ -47,10 +47,10 @@ const MainTabNavigator = () => {
                     tabBarButton: () => <TabCartButton onPress={() => navigation.navigate('Cart')} />
                 })}
             />
-            <Tab.Screen name="Grocery" component={GroceryScreen}
+            <Tab.Screen name="Wallet" component={GroceryScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Feather name="shopping-bag" color={color} size={size} />
+                        <Feather name="credit-card" color={color} size={size} />
                     )
                 }}
             />

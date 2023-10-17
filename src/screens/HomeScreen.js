@@ -13,7 +13,7 @@ const YELP_API_KEY = "";
 
 const HomeScreen = () => {
     const [restaurantData, setRestaurantData] = useState(localRestaurants)
-    const [city, setCity] = useState("San Francisco")
+    const [city, setCity] = useState("Paris")
     const [activeTab, setActiveTab] = useState("Delivery");
     const [loading, setLoading] = useState(false)
 
@@ -48,7 +48,7 @@ const HomeScreen = () => {
 
     return (
         <Screen style={tailwind`bg-white flex-1`}>
-            <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+            {/* <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} /> */}
             <SearchBar setCity={setCity} city={city} />
             <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
                 <Categories />
