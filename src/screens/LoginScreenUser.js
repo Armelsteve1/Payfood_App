@@ -43,7 +43,7 @@ function LoginScreenUser({ navigation }) {
           <Image style={styles.logo} source={require("../assets/logo.png")} />
         </View>
         <Text style={styles.wellcomeTo}>
-          Login to Uber <Text style={styles.brand}>Eats</Text>
+          Login to Pay<Text style={styles.brand}>Food</Text>
         </Text>
         <View style={styles.form}>
           <AppForm

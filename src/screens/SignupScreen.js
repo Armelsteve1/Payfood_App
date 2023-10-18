@@ -60,7 +60,7 @@ function SignupScreen({ navigation }) {
           <Image style={styles.logo} source={require("../assets/logo.png")} />
         </View>
         <Text style={styles.wellcomeTo}>
-          Join to Uber <Text style={styles.brand}>Eats</Text>
+          Join Pay<Text style={styles.brand}>Food</Text>
         </Text>
         <View style={styles.form}>
           <AppForm

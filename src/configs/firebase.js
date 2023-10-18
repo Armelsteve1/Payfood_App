@@ -20,3 +20,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
+
+// import firebase from 'firebase/app';
+// import 'firebase/firestore';
+
+// const firebaseConfig = {
+//   apiKey: 'YOUR_API_KEY',
+//   authDomain: 'YOUR_AUTH_DOMAIN',
+//   projectId: 'payfood-7925c',
+//   storageBucket: 'YOUR_STORAGE_BUCKET',
+//   messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+//   appId: 'YOUR_APP_ID'
+// };
+
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
+
+// // Now you can use Firebase services in your app
+// const db = firebase.firestore();
