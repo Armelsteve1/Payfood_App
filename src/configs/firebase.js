@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMFzvO7mmZTA7-yUinI5Et6vzelTyj4a0",
@@ -14,5 +16,18 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth();
+
+if (isSupported()) {
+  const analytics = getAnalytics(app);
+  console.log("Firebase Analytics is supported");
+} else {
+  console.warn("Firebase Analytics is not supported in this environment");
+}
+
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage)
+});
+
+console.log("Firebase initialized successfully");
+console.log("auth", auth);
+console.log("app", app);

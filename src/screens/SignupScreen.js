@@ -1,5 +1,5 @@
-import React from "react";
-import { Alert, Image, StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { Alert, Image, StyleSheet, Text, View } from 'react-native';
 import AppForm from "../components/forms/AppForm";
 import Screen from "../components/Screen";
 import colors from "../configs/colors";
@@ -13,11 +13,11 @@ const ValidationSchema = yup.object().shape({
   name: yup
     .string()
     .min(3, ({ min }) => `Name must be at least ${min} characters`)
-    .max(50, ({ max }) => `Name must be less then ${max} characters`)
+    .max(50, ({ max }) => `Name must be less than ${max} characters`)
     .required("Name is Required"),
   email: yup
     .string()
-    .email("Please enter valid email")
+    .email("Please enter a valid email")
     .required("Email Address is Required"),
   password: yup
     .string()
@@ -26,6 +26,27 @@ const ValidationSchema = yup.object().shape({
 });
 
 function SignupScreen({ navigation }) {
+  const [authInitialized, setAuthInitialized] = useState(false);
+
+  console.log("auth", auth);
+  useEffect(() => {
+    // Wait for Firebase initialization to complete
+    auth
+      .getRedirectResult()
+      .then((result) => {
+        setAuthInitialized(true);
+      })
+      .catch((error) => {
+        console.error("Firebase initialization error", error);
+        setAuthInitialized(true);
+      });
+  }, []);
+
+  if (!authInitialized) {
+    return <Text style={styles.wellcomeTo}>
+      Join Pay<Text style={styles.brand}>Food</Text>
+    </Text>;
+  }
 
   const signUpUser = ({ name, email, password }) => {
     auth
@@ -37,16 +58,16 @@ function SignupScreen({ navigation }) {
             // User account created & signed in!
           })
           .catch((err) => {
-            Alert.alert("Error", err.message)
+            Alert.alert("Error", err.message);
           });
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
-          Alert.alert("Error", "That email address is already in use!")
+          Alert.alert("Error", "That email address is already in use!");
         }
 
         if (error.code === "auth/invalid-email") {
-          Alert.alert("Error", "That email address is invalid!")
+          Alert.alert("Error", "That email address is invalid!");
         }
 
         Alert.alert('ERROR: ', error.message);
@@ -104,7 +125,7 @@ function SignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   wrapper: {
     paddingHorizontal: 20,
