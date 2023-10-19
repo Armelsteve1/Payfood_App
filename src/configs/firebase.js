@@ -31,3 +31,5 @@ const auth = initializeAuth(app, {
 console.log("Firebase initialized successfully");
 console.log("auth", auth);
 console.log("app", app);
+
+export { auth, app };

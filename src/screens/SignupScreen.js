@@ -28,25 +28,22 @@ const ValidationSchema = yup.object().shape({
 function SignupScreen({ navigation }) {
   const [authInitialized, setAuthInitialized] = useState(false);
 
-  console.log("auth", auth);
   useEffect(() => {
-    // Wait for Firebase initialization to complete
-    auth
-      .getRedirectResult()
-      .then((result) => {
-        setAuthInitialized(true);
-      })
-      .catch((error) => {
-        console.error("Firebase initialization error", error);
-        setAuthInitialized(true);
-      });
+    // Check if Firebase auth is initialized
+    if (auth) {
+      setAuthInitialized(true);
+    } else {
+      // Firebase auth is not yet initialized
+      console.log("Firebase auth is not ready");
+    }
   }, []);
 
-  if (!authInitialized) {
-    return <Text style={styles.wellcomeTo}>
-      Join Pay<Text style={styles.brand}>Food</Text>
-    </Text>;
-  }
+  console.log("auth", auth);
+  // if (!authInitialized) {
+  //   return <Text style={styles.wellcomeTo}>
+  //     Join Pay<Text style={styles.brand}>Food</Text>
+  //   </Text>;
+  // }
 
   const signUpUser = ({ name, email, password }) => {
     auth
