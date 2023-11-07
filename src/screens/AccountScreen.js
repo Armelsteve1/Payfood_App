@@ -37,6 +37,9 @@ const AccountScreen = ({ navigation }) => {
                 </View>
                 <Text style={tailwind`mt-4 text-3xl font-bold`}>{user?.name}</Text>
                 <Text style={tailwind`text-lg text-indigo-900`}>{user?.email}</Text>
+                <TouchableOpacity onPress={() => navigation.navigate("EditProfileScreen")} style={tailwind`mt-2 ml-2`}>
+                    <AntDesign name="edit" size={24} color="black" />
+                </TouchableOpacity>
             </View>
             <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
                 <Text style={tailwind`text-gray-800 mt-2 text-lg mb-2`}>Saved places</Text>
@@ -57,7 +60,7 @@ const AccountScreen = ({ navigation }) => {
                     <Text style={tailwind`text-green-900 mt-2`}>Sign out</Text>
                 </TouchableOpacity>
             </View>
-        </Screen>
+        </Screen >
     );
 }
 
