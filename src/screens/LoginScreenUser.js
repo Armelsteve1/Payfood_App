@@ -30,7 +30,6 @@ function LoginScreenUser({ navigation }) {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         // Login successful, navigate to a different screen
-        navigation.navigate("Account");
       })
       .catch((error) => {
         if (error.code === "auth/invalid-password") {
@@ -76,7 +75,7 @@ function LoginScreenUser({ navigation }) {
         <Text style={styles.join}>
           Not a member?{" "}
           <Text
-            onPress={() => navigation.navigate("SignUpScreen")}
+            onPress={() => navigation.navigate("Signup")}
             style={{ color: colors.primary }}
           >
             Sign Up
