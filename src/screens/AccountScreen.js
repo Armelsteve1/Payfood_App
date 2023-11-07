@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
+import Modal from 'react-native-modal';
 import Screen from '../components/Screen'
 import tailwind from 'tailwind-react-native-classnames';
 import AppHead from '../components/AppHead';
@@ -9,9 +10,14 @@ import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from '../configs/firebase'
 import { useNavigation } from '@react-navigation/native';
+import EditProfileScreen from './EditProfileScreen';
 
 const AccountScreen = ({ navigation }) => {
 
+    const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
+    const toggleEditProfileModal = () => {
+        setIsEditProfileModalVisible(!isEditProfileModalVisible);
+    };
     const user = useSelector(selectUser)
 
     console.log('auth', auth);
@@ -37,7 +43,7 @@ const AccountScreen = ({ navigation }) => {
                 </View>
                 <Text style={tailwind`mt-4 text-3xl font-bold`}>{user?.name}</Text>
                 <Text style={tailwind`text-lg text-indigo-900`}>{user?.email}</Text>
-                <TouchableOpacity onPress={() => navigation.navigate("EditProfileScreen")} style={tailwind`mt-2 ml-2`}>
+                <TouchableOpacity onPress={toggleEditProfileModal} style={tailwind`mt-2 ml-2`}>
                     <AntDesign name="edit" size={24} color="black" />
                 </TouchableOpacity>
             </View>
@@ -60,6 +66,17 @@ const AccountScreen = ({ navigation }) => {
                     <Text style={tailwind`text-green-900 mt-2`}>Sign out</Text>
                 </TouchableOpacity>
             </View>
+
+            {/* Modal for Edit Profile */}
+            <Modal
+                isVisible={isEditProfileModalVisible}
+                onBackdropPress={toggleEditProfileModal}
+                backdropOpacity={0.7}
+            >
+                <View>
+                    <EditProfileScreen onClose={toggleEditProfileModal} />
+                </View>
+            </Modal>
         </Screen >
     );
 }
@@ -74,5 +91,6 @@ const SavedPlaces = ({ title, text, Icon }) => (
     </TouchableOpacity>
 )
 
-export default AccountScreen;
 
+
+export default AccountScreen;

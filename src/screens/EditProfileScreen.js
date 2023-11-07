@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/authSlice';
 import { getAuth, updateProfile } from "firebase/auth";
 
-const EditProfileScreen = ({ navigation }) => {
+export default function EditProfileScreen({ navigation }) {
     const user = useSelector(selectUser);
     const [newName, setNewName] = useState(user?.name);
     const [newPhoneNumber, setNewPhoneNumber] = useState(user?.phoneNumber);
@@ -27,7 +27,7 @@ const EditProfileScreen = ({ navigation }) => {
     };
 
     return (
-        <Screen style={tailwind`flex-1 bg-white`}>
+        <Screen style={tailwind`flex-1 bg-white`} >
             <View style={tailwind`p-4`}>
                 <Text style={tailwind`text-3xl font-bold`}>Edit Profile</Text>
                 <TextInput
@@ -49,8 +49,8 @@ const EditProfileScreen = ({ navigation }) => {
                     <Text style={tailwind`text-white text-center`}>Update Profile</Text>
                 </TouchableOpacity>
             </View>
-        </Screen>
+        </Screen >
     );
 };
 
-export default EditProfileScreen;
+// export default EditProfileScreen;
