@@ -4,19 +4,20 @@ import Screen from '../components/Screen';
 import tailwind from 'tailwind-react-native-classnames';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/authSlice';
-import { auth } from '../configs/firebase';
-import { updateProfile } from "firebase";
+import { getAuth, updateProfile } from "firebase/auth";
 
 const EditProfileScreen = ({ navigation }) => {
     const user = useSelector(selectUser);
     const [newName, setNewName] = useState(user?.name);
     const [newPhoneNumber, setNewPhoneNumber] = useState(user?.phoneNumber);
 
+    const auth = getAuth();
+    console.log("auth", auth);
     const handleUpdateProfile = async () => {
         try {
-            await updateProfile(user, {
+            await updateProfile(auth.currentUser, {
                 displayName: newName,
-                displayPhoneNumber: newPhoneNumber,
+                phoneNumber: newPhoneNumber
             });
             Alert.alert('Success', 'Profile updated successfully');
             navigation.navigate('Account');
