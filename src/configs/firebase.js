@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { initializeAuth, getReactNativePersistence } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -12,7 +13,7 @@ const firebaseConfig = {
   storageBucket: "payfood-7925c.appspot.com",
   messagingSenderId: "586328239954",
   appId: "1:586328239954:web:f00b8d2450e0c1b1a9148b",
-  measurementId: "G-129T1FR4RZ"
+  measurementId: "G-129T1FR4RZ",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -25,12 +26,15 @@ if (isSupported()) {
 }
 
 const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage)
+  persistence: getReactNativePersistence(AsyncStorage),
 });
 
+// Initialize Firestore
+const firestore = getFirestore(app);
 
 console.log("Firebase initialized successfully");
 console.log("auth", auth);
 console.log("app", app);
+console.log("firestore", firestore);
 
-export { auth, app, createUserWithEmailAndPassword, signInWithEmailAndPassword };
+export { auth, app, createUserWithEmailAndPassword, signInWithEmailAndPassword, firestore };
