@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Card } from "react-native-elements";
 
-export default function WalletPage() {
+export default function WalletScreen() {
   return (
     <View style={styles.container}>
       <Card containerStyle={styles.card}>

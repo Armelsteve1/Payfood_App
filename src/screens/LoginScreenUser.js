@@ -29,8 +29,7 @@ function LoginScreenUser({ navigation }) {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        // Login successful, navigate to a different screen
-        navigation.navigate("Account");
+        navigation.navigate(Account);
       })
       .catch((error) => {
         if (error.code === "auth/invalid-password") {
