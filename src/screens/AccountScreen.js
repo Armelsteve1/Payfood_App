@@ -10,28 +10,22 @@ import { Ionicons } from '@expo/vector-icons';
 import { auth } from '../configs/firebase'
 import { useNavigation } from '@react-navigation/native';
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
 
     const user = useSelector(selectUser)
 
     console.log('auth', auth);
     console.log('user', user);
 
-    const navigation = useNavigation();
-
-    // const handleSignOut = () => {
-    //     auth
-    //         .signOut()
-    //         .then(() => {
-    //             navigation.navigate('LoginScreenUser');
-    //         })
-    //         .catch((error) => {
-    //             console.error('Sign-out error:', error);
-    //         });
-    // };
-
     const handleSignOut = () => {
-        navigation.navigate('LoginScreenUser');
+        auth
+            .signOut()
+            .then(() => {
+                navigation.navigate('UserLogin');
+            })
+            .catch((error) => {
+                console.error('Sign-out error:', error);
+            });
     };
 
     return (
@@ -67,8 +61,6 @@ const AccountScreen = () => {
     );
 }
 
-export default AccountScreen;
-
 const SavedPlaces = ({ title, text, Icon }) => (
     <TouchableOpacity style={tailwind`flex-row items-center my-3`}>
         <Icon />
@@ -78,3 +70,6 @@ const SavedPlaces = ({ title, text, Icon }) => (
         </View>
     </TouchableOpacity>
 )
+
+export default AccountScreen;
+

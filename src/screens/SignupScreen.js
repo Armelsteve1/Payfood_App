@@ -7,6 +7,7 @@ import * as yup from "yup";
 import AppFormFeilds from "../components/forms/AppFormFeilds";
 import AppSubmitButton from "../components/forms/AppSubmitButton";
 import { auth } from "../configs/firebase";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import tailwind from 'tailwind-react-native-classnames';
 
 const ValidationSchema = yup.object().shape({
@@ -39,32 +40,22 @@ function SignupScreen({ navigation }) {
   }, []);
 
   console.log("auth", auth);
-  // if (!authInitialized) {
-  //   return <Text style={styles.wellcomeTo}>
-  //     Join Pay<Text style={styles.brand}>Food</Text>
-  //   </Text>;
-  // }
+  console.log("authInitialized", authInitialized);
+
 
   const signUpUser = ({ name, email, password }) => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        result.user
-          .updateProfile({ displayName: name })
-          .then(() => {
-            // User account created & signed in!
-          })
-          .catch((err) => {
-            Alert.alert("Error", err.message);
-          });
+        navigation.navigate('UserLogin');
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
-          Alert.alert("Error", "That email address is already in use!");
+          Alert.alert("Error", "That email address is already in use!")
         }
 
         if (error.code === "auth/invalid-email") {
-          Alert.alert("Error", "That email address is invalid!");
+          Alert.alert("Error", "That email address is invalid!")
         }
 
         Alert.alert('ERROR: ', error.message);
@@ -108,7 +99,7 @@ function SignupScreen({ navigation }) {
         <Text style={styles.join}>
           Already a member?{" "}
           <Text
-            onPress={() => navigation.navigate("LoginScreenUser")}
+            onPress={() => navigation.navigate("UserLogin")}
             style={{ color: colors.primary }}
           >
             Log In
