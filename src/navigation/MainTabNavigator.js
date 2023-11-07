@@ -56,7 +56,7 @@ const MainTabNavigator = () => {
                     )
                 }}
             />
-            <Tab.Screen name="Account" component={AccountStack}
+            <Tab.Screen name="Account" component={AccountScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Feather name="user" color={color} size={size} />
