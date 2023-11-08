@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getAnalytics, isSupported } from "firebase/analytics";
+// import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMFzvO7mmZTA7-yUinI5Et6vzelTyj4a0",
@@ -18,23 +18,22 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-if (isSupported()) {
-  const analytics = getAnalytics(app);
-  console.log("Firebase Analytics is supported");
-} else {
-  console.warn("Firebase Analytics is not supported in this environment");
-}
+// if (isSupported()) {
+//   const analytics = getAnalytics(app);
+//   console.log("Firebase Analytics is supported");
+// } else {
+//   console.warn("Firebase Analytics is not supported in this environment");
+// }
 
 const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
 });
 
-// Initialize Firestore
 const firestore = getFirestore(app);
 
-console.log("Firebase initialized successfully");
-console.log("auth", auth);
 console.log("app", app);
+console.log("auth", auth);
 console.log("firestore", firestore);
+console.log("Firebase initialized successfully");
 
 export { auth, app, createUserWithEmailAndPassword, signInWithEmailAndPassword, firestore };

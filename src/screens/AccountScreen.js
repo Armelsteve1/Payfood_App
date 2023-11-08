@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity, Alert } from 'react-native';
 import Modal from 'react-native-modal';
 import Screen from '../components/Screen'
 import tailwind from 'tailwind-react-native-classnames';
@@ -8,19 +8,26 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/authSlice'
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { auth } from '../configs/firebase'
+import { auth } from '../configs/firebase';
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import EditProfileScreen from './EditProfileScreen';
-import colors from '../configs/colors'
+import colors from '../configs/colors';
 
 const AccountScreen = ({ navigation }) => {
 
     const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
+    const [isResetPasswordAlertVisible, setIsResetPasswordAlertVisible] = useState(false);
+    const user = useSelector(selectUser);
+
     const toggleEditProfileModal = () => {
         setIsEditProfileModalVisible(!isEditProfileModalVisible);
     };
 
-    console.log('auth', auth);
-    console.log('user', user);
+    const toggleResetPasswordAlert = () => {
+        setIsResetPasswordAlertVisible(!isResetPasswordAlertVisible);
+    };
+
+    const auth = getAuth();
 
     const handleSignOut = () => {
         auth
@@ -32,6 +39,20 @@ const AccountScreen = ({ navigation }) => {
                 console.error('Sign-out error:', error);
             });
     };
+
+    const handleResetPassword = () => {
+
+        const email = user.email;
+        sendPasswordResetEmail(auth, user.email)
+            .then(() => {
+                Alert.alert('Succès', 'Un e-mail de réinitialisation du mot de passe a été envoyé à ', email);
+                console.log("reset pwd email sent")
+            })
+            .catch((error) => {
+                console.error('Password reset error:', error);
+            });
+    };
+
 
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
@@ -65,6 +86,9 @@ const AccountScreen = ({ navigation }) => {
             </View>
             <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
                 <Text style={tailwind`text-gray-800 mt-2 text-lg`}>Autres options</Text>
+                <TouchableOpacity onPress={handleResetPassword}>
+                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.primary }}>Réinitialiser le mot de passe</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={handleSignOut}>
                     <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.primary }}>Se déconnecter</Text>
                 </TouchableOpacity>
