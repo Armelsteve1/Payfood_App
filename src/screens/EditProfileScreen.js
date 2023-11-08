@@ -4,22 +4,29 @@ import Screen from '../components/Screen';
 import tailwind from 'tailwind-react-native-classnames';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/authSlice';
-import { getAuth, updateProfile } from "firebase/auth";
-import colors from '../configs/colors'
+import { getAuth, updateProfile, updateEmail } from "firebase/auth";
+import colors from '../configs/colors';
 
 export default function EditProfileScreen({ navigation }) {
     const user = useSelector(selectUser);
     const [newName, setNewName] = useState(user?.name);
     const [newPhoneNumber, setNewPhoneNumber] = useState(user?.phoneNumber);
-
+    const [newEmail, setNewEmail] = useState(user?.email);
     const auth = getAuth();
-    console.log('auth', auth);
+
     const handleUpdateProfile = async () => {
         try {
+            // Update profile information
             await updateProfile(auth.currentUser, {
                 displayName: newName,
-                phoneNumber: newPhoneNumber
+                phoneNumber: newPhoneNumber,
             });
+
+            // Update the email if changed
+            if (newEmail !== user.email) {
+                await updateEmail(auth.currentUser, newEmail);
+            }
+
             Alert.alert('Success', 'Profile updated successfully');
         } catch (error) {
             Alert.alert('Error', error.message);
@@ -44,6 +51,13 @@ export default function EditProfileScreen({ navigation }) {
                         value={newPhoneNumber}
                         onChangeText={(text) => setNewPhoneNumber(text)}
                     />
+                    <TextInput
+                        style={tailwind`border border-gray-300 rounded-md p-2 mt-2`}
+                        placeholder="Adresse email"
+                        placeholderTextColor="grey"
+                        value={newEmail}
+                        onChangeText={(text) => setNewEmail(email)}
+                    />
                 </View>
                 <View style={{ justifyContent: 'flex-end', flex: 1 }}>
                     <TouchableOpacity
@@ -54,7 +68,6 @@ export default function EditProfileScreen({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-        </Screen >
-
+        </Screen>
     );
-};
+}
