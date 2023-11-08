@@ -10,6 +10,9 @@ import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { getAuth, sendPasswordResetEmail, deleteUser } from "firebase/auth";
 import EditProfileScreen from './EditProfileScreen';
+import AccountSettingsScreen from './AccountSettingsScreen';
+
+
 import colors from '../configs/colors';
 
 const AccountScreen = ({ navigation }) => {
@@ -54,8 +57,6 @@ const AccountScreen = ({ navigation }) => {
                 console.error('Password reset error:', error);
             });
     };
-
-    // const user2 = auth.currentUser;
 
     const handleDelete = () => {
 
@@ -111,7 +112,7 @@ const AccountScreen = ({ navigation }) => {
                     <SavedPlaces
                         title="Mes préférences"
                         text="Gérer les paramètres de mon compte"
-                        Icon={() => <Ionicons name="build" size={24} color={colors.primary} onPress={() => navigation.navigate('Wallet')} />}
+                        Icon={() => <Ionicons name="build" size={24} color={colors.primary} onPress={() => navigation.navigate('AccountSettingsScreen')} />}
                     />
                 </View>
                 <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
