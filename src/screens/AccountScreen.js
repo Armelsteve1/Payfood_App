@@ -56,12 +56,12 @@ const AccountScreen = ({ navigation }) => {
                 <SavedPlaces
                     title="Accueil"
                     text="Aller à l'accueil"
-                    Icon={() => <AntDesign name="home" size={24} color={colors.primary} />}
+                    Icon={() => <AntDesign name="home" size={24} color={colors.primary} onPress={() => navigation.navigate('Home')} />}
                 />
                 <SavedPlaces
                     title="Mon porte monnaie"
                     text="Voir méthodes de paiement disponibles"
-                    Icon={() => <Ionicons name="md-briefcase-outline" size={24} color={colors.primary} />}
+                    Icon={() => <Ionicons name="md-briefcase-outline" size={24} color={colors.primary} onPress={() => navigation.navigate('Wallet')} />}
                 />
             </View>
             <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
