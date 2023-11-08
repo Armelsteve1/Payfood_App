@@ -1,22 +1,24 @@
-import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
-import colors from '../configs/colors'
+import React from 'react';
+import { ImageBackground, StyleSheet, Text, View, Image } from 'react-native';
+import colors from '../configs/colors';
 import AppButton from '../components/AppButton';
 
 function JoinScreen({ navigation }) {
-
     return (
         <View style={styles.container}>
-            <View style={styles.image}>
+            <ImageBackground
+                source={require("../assets/homePage.png")}
+                style={styles.image}
+            >
                 <Image style={styles.logo} source={require("../assets/logo.png")} />
                 <View style={styles.content}>
                     <Text style={styles.title}>Payfood</Text>
-                    <Text style={styles.subTitle}>manger bio et gagner de l'argent.</Text>
+                    <Text style={styles.subTitle}>Manger bio et gagner de l'argent</Text>
                     <AppButton title="Let's go" onPress={() => navigation.navigate("Signup")} />
                 </View>
-            </View>
+            </ImageBackground>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -25,19 +27,15 @@ const styles = StyleSheet.create({
     },
     logo: {
         height: 200,
-        resizeMode: "contain",
+        resizeMode: 'contain',
         alignSelf: "center",
         position: 'absolute',
-        zIndex: 99999,
-        top: 160
+        top: 10
     },
     image: {
         width: '100%',
-        resizeMode: 'cover',
-        flex: 1,
-        position: 'relative',
+        height: '100%',
         justifyContent: 'flex-end',
-        backgroundColor: colors.dark
     },
     content: {
         backgroundColor: colors.white,
@@ -66,6 +64,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: 15
     },
-})
+});
 
-export default JoinScreen
+export default JoinScreen;

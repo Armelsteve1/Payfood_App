@@ -18,6 +18,7 @@ export default function AppNavigator() {
                 const user = {
                     name: authUser.displayName,
                     image: authUser.photoURL,
+                    phoneNumber: authUser.phoneNumber,
                     email: authUser.email
                 }
                 dispatch(loginUser(user))
