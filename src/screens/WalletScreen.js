@@ -21,7 +21,6 @@ export default function WalletScreen() {
   };
 
   const handleRecharge = () => {
-    // Faites quelque chose avec la valeur de recharge, par exemple, mettez à jour votre solde.
     console.log("Montant de recharge :", rechargeAmount);
     setModalVisible(false);
   };
@@ -71,7 +70,6 @@ export default function WalletScreen() {
           <Text
             style={{
               color: "#000",
-              fontFamily: "Montserrat",
               fontSize: 20,
               fontStyle: "normal",
               fontWeight: "500",
@@ -107,7 +105,6 @@ export default function WalletScreen() {
           <Text
             style={{
               color: "#000",
-              fontFamily: "Montserrat",
               fontSize: 20,
               fontStyle: "normal",
               fontWeight: "500",
@@ -177,14 +174,12 @@ const styles = {
   },
   text: {
     color: "#FFF",
-    fontFamily: "Montserrat",
     fontSize: 16,
     fontWeight: "700",
     textTransform: "uppercase",
   },
   text1: {
     color: "#FFF",
-    fontFamily: "Montserrat",
     fontSize: 32,
     fontWeight: "700",
     textTransform: "uppercase",
