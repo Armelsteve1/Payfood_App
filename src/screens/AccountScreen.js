@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Image, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import Screen from '../components/Screen'
 import tailwind from 'tailwind-react-native-classnames';
@@ -95,32 +95,38 @@ const AccountScreen = ({ navigation }) => {
                 </View>
                 <Text style={tailwind`text-lg text-gray-600`}>{user?.email}</Text>
             </View >
-            <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
-                <Text style={tailwind`text-gray-800 mt-2 text-lg mb-2`}>Favoris</Text>
-                <SavedPlaces
-                    title="Accueil"
-                    text="Aller à l'accueil"
-                    Icon={() => <AntDesign name="home" size={24} color={colors.primary} onPress={() => navigation.navigate('Home')} />}
-                />
-                <SavedPlaces
-                    title="Mon porte monnaie"
-                    text="Voir méthodes de paiement disponibles"
-                    Icon={() => <Ionicons name="md-briefcase-outline" size={24} color={colors.primary} onPress={() => navigation.navigate('Wallet')} />}
-                />
-            </View>
-            <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
-                <Text style={tailwind`text-gray-800 mt-2 text-lg`}>Autres options</Text>
-                <TouchableOpacity onPress={handleResetPassword}>
-                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.gray }}>Réinitialiser mon mot de passe</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleSignOut}>
-                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.gray }}>Se déconnecter</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleDelete}>
-                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.denger }}>Supprimer mon compte</Text>
-                </TouchableOpacity>
-            </View>
-
+            <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={true}>
+                <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
+                    <Text style={tailwind`text-gray-800 mt-2 text-lg mb-2`}>Favoris</Text>
+                    <SavedPlaces
+                        title="Accueil"
+                        text="Aller à l'accueil"
+                        Icon={() => <AntDesign name="home" size={24} color={colors.primary} onPress={() => navigation.navigate('Home')} />}
+                    />
+                    <SavedPlaces
+                        title="Mon porte monnaie"
+                        text="Voir méthodes de paiement disponibles"
+                        Icon={() => <Ionicons name="wallet" size={24} color={colors.primary} onPress={() => navigation.navigate('Wallet')} />}
+                    />
+                    <SavedPlaces
+                        title="Mes préférences"
+                        text="Gérer les paramètres de mon compte"
+                        Icon={() => <Ionicons name="build" size={24} color={colors.primary} onPress={() => navigation.navigate('Wallet')} />}
+                    />
+                </View>
+                <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
+                    <Text style={tailwind`text-gray-800 mt-2 text-lg`}>Autres options</Text>
+                    <TouchableOpacity onPress={handleResetPassword}>
+                        <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.gray }}>Réinitialiser mon mot de passe</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleSignOut}>
+                        <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.gray }}>Se déconnecter</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleDelete}>
+                        <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.denger }}>Supprimer mon compte</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
             <Modal
                 isVisible={isEditProfileModalVisible}
                 onBackdropPress={toggleEditProfileModal}
