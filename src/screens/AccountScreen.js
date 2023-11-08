@@ -67,13 +67,23 @@ const AccountScreen = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-            {/* Modal for Edit Profile */}
             <Modal
                 isVisible={isEditProfileModalVisible}
                 onBackdropPress={toggleEditProfileModal}
                 backdropOpacity={0.7}
+                style={{
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
             >
-                <View>
+                <View style={{
+                    width: 300,
+                    height: 400,
+                    backgroundColor: 'white',
+                    borderRadius: 10,
+                    // justifyContent: 'center',
+                    // alignItems: 'center'
+                }}>
                     <EditProfileScreen onClose={toggleEditProfileModal} />
                 </View>
             </Modal>

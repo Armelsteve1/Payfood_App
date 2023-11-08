@@ -5,6 +5,8 @@ import tailwind from 'tailwind-react-native-classnames';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/authSlice';
 import { getAuth, updateProfile } from "firebase/auth";
+import { color } from 'react-native-elements/dist/helpers';
+import colors from '../configs/colors'
 
 export default function EditProfileScreen({ navigation }) {
     const user = useSelector(selectUser);
@@ -12,7 +14,7 @@ export default function EditProfileScreen({ navigation }) {
     const [newPhoneNumber, setNewPhoneNumber] = useState(user?.phoneNumber);
 
     const auth = getAuth();
-    console.log("auth", auth);
+    console.log('auth', auth);
     const handleUpdateProfile = async () => {
         try {
             await updateProfile(auth.currentUser, {
@@ -27,7 +29,7 @@ export default function EditProfileScreen({ navigation }) {
     };
 
     return (
-        <Screen style={tailwind`flex-1 bg-white`} >
+        <Screen style={tailwind`flex-1 bg-white`}>
             <View style={tailwind`p-4`}>
                 <Text style={tailwind`text-3xl font-bold`}>Edit Profile</Text>
                 <TextInput
@@ -39,11 +41,12 @@ export default function EditProfileScreen({ navigation }) {
                 <TextInput
                     style={tailwind`border border-gray-300 rounded-md p-2 mt-2`}
                     placeholder="Phone Number"
+                    placeholderTextColor="grey"
                     value={newPhoneNumber}
                     onChangeText={(text) => setNewPhoneNumber(text)}
                 />
                 <TouchableOpacity
-                    style={tailwind`bg-blue-500 p-2 rounded-md mt-4`}
+                    style={{ backgroundColor: colors.primary, padding: 10, borderRadius: 5, marginTop: 4 }}
                     onPress={handleUpdateProfile}
                 >
                     <Text style={tailwind`text-white text-center`}>Update Profile</Text>
@@ -52,5 +55,3 @@ export default function EditProfileScreen({ navigation }) {
         </Screen >
     );
 };
-
-// export default EditProfileScreen;
