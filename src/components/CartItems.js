@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, Image, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import tailwind from 'tailwind-react-native-classnames';
-import { selectCartItems, updateBasket } from '../redux/slices/basketSlice';
+import { selectCartItems, updateBusket } from '../redux/slices/basketSlice';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import colors from '../configs/colors';
 
@@ -25,7 +25,7 @@ const CartItems = () => {
             return item;
         });
 
-        dispatch(updateBasket(updatedCartItems));
+        dispatch(updateBusket(updatedCartItems));
     }
 
     return (

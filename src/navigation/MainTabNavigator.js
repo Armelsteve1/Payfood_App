@@ -8,8 +8,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import BrowseScreen from '../screens/BrowseScreen';
 import CartScreen from '../screens/CartScreen';
-import GroceryScreen from '../screens/GroceryScreen';
+import WalletScreen from '../screens/WalletScreen';
 import AccountScreen from '../screens/AccountScreen';
+
 
 const Tab = createBottomTabNavigator()
 
@@ -47,7 +48,7 @@ const MainTabNavigator = () => {
                     tabBarButton: () => <TabCartButton onPress={() => navigation.navigate('Cart')} />
                 })}
             />
-            <Tab.Screen name="Wallet" component={GroceryScreen}
+            <Tab.Screen name="Wallet" component={WalletScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Feather name="credit-card" color={color} size={size} />

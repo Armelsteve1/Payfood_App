@@ -8,9 +8,25 @@ import { selectUser } from '../redux/slices/authSlice'
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from '../configs/firebase'
+import { useNavigation } from '@react-navigation/native';
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
+
     const user = useSelector(selectUser)
+
+    console.log('auth', auth);
+    console.log('user', user);
+
+    const handleSignOut = () => {
+        auth
+            .signOut()
+            .then(() => {
+                navigation.navigate('UserLogin');
+            })
+            .catch((error) => {
+                console.error('Sign-out error:', error);
+            });
+    };
 
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
@@ -37,15 +53,13 @@ const AccountScreen = () => {
             </View>
             <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
                 <Text style={tailwind`text-gray-800 mt-2 text-lg`}>Other options</Text>
-                <TouchableOpacity onPress={() => auth.signOut()}>
+                <TouchableOpacity onPress={handleSignOut}>
                     <Text style={tailwind`text-green-900 mt-2`}>Sign out</Text>
                 </TouchableOpacity>
             </View>
         </Screen>
     );
 }
-
-export default AccountScreen;
 
 const SavedPlaces = ({ title, text, Icon }) => (
     <TouchableOpacity style={tailwind`flex-row items-center my-3`}>
@@ -56,3 +70,6 @@ const SavedPlaces = ({ title, text, Icon }) => (
         </View>
     </TouchableOpacity>
 )
+
+export default AccountScreen;
+

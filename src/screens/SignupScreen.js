@@ -1,5 +1,5 @@
-import React from "react";
-import { Alert, Image, StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { Alert, Image, StyleSheet, Text, View } from 'react-native';
 import AppForm from "../components/forms/AppForm";
 import Screen from "../components/Screen";
 import colors from "../configs/colors";
@@ -7,17 +7,18 @@ import * as yup from "yup";
 import AppFormFeilds from "../components/forms/AppFormFeilds";
 import AppSubmitButton from "../components/forms/AppSubmitButton";
 import { auth } from "../configs/firebase";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import tailwind from 'tailwind-react-native-classnames';
 
 const ValidationSchema = yup.object().shape({
   name: yup
     .string()
     .min(3, ({ min }) => `Name must be at least ${min} characters`)
-    .max(50, ({ max }) => `Name must be less then ${max} characters`)
+    .max(50, ({ max }) => `Name must be less than ${max} characters`)
     .required("Name is Required"),
   email: yup
     .string()
-    .email("Please enter valid email")
+    .email("Please enter a valid email")
     .required("Email Address is Required"),
   password: yup
     .string()
@@ -26,19 +27,27 @@ const ValidationSchema = yup.object().shape({
 });
 
 function SignupScreen({ navigation }) {
+  const [authInitialized, setAuthInitialized] = useState(false);
+
+  useEffect(() => {
+    // Check if Firebase auth is initialized
+    if (auth) {
+      setAuthInitialized(true);
+    } else {
+      // Firebase auth is not yet initialized
+      console.log("Firebase auth is not ready");
+    }
+  }, []);
+
+  console.log("auth", auth);
+  console.log("authInitialized", authInitialized);
+
 
   const signUpUser = ({ name, email, password }) => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        result.user
-          .updateProfile({ displayName: name })
-          .then(() => {
-            // User account created & signed in!
-          })
-          .catch((err) => {
-            Alert.alert("Error", err.message)
-          });
+        navigation.navigate('UserLogin');
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
@@ -60,7 +69,7 @@ function SignupScreen({ navigation }) {
           <Image style={styles.logo} source={require("../assets/logo.png")} />
         </View>
         <Text style={styles.wellcomeTo}>
-          Join to Uber <Text style={styles.brand}>Eats</Text>
+          Join Pay<Text style={styles.brand}>Food</Text>
         </Text>
         <View style={styles.form}>
           <AppForm
@@ -93,7 +102,7 @@ function SignupScreen({ navigation }) {
             onPress={() => navigation.navigate("UserLogin")}
             style={{ color: colors.primary }}
           >
-            Logn In
+            Log In
           </Text>
         </Text>
       </View>
@@ -104,7 +113,7 @@ function SignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   wrapper: {
     paddingHorizontal: 20,
