@@ -51,7 +51,7 @@ function SignupScreen({ navigation }) {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // After successful sign-up, update the user's profile with the name
+      // After successful signup, update user's profile with name
       await updateProfile(user, { displayName: name });
 
       // Save user data to Firestore

@@ -18,6 +18,7 @@ const AccountScreen = ({ navigation }) => {
     const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
     const [isResetPasswordAlertVisible, setIsResetPasswordAlertVisible] = useState(false);
     const user = useSelector(selectUser);
+    console.log("user", user)
 
     const toggleEditProfileModal = () => {
         setIsEditProfileModalVisible(!isEditProfileModalVisible);
@@ -42,10 +43,9 @@ const AccountScreen = ({ navigation }) => {
 
     const handleResetPassword = () => {
 
-        const email = user.email;
         sendPasswordResetEmail(auth, user.email)
             .then(() => {
-                Alert.alert('Succès', 'Un e-mail de réinitialisation du mot de passe a été envoyé à ', email);
+                Alert.alert('Succès', 'Un e-mail de réinitialisation du mot de passe a été envoyé.');
                 console.log("reset pwd email sent")
             })
             .catch((error) => {
@@ -87,7 +87,7 @@ const AccountScreen = ({ navigation }) => {
             <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
                 <Text style={tailwind`text-gray-800 mt-2 text-lg`}>Autres options</Text>
                 <TouchableOpacity onPress={handleResetPassword}>
-                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.primary }}>Réinitialiser le mot de passe</Text>
+                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.gray }}>Réinitialiser mon mot de passe</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleSignOut}>
                     <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.primary }}>Se déconnecter</Text>

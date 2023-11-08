@@ -4,25 +4,39 @@ import Screen from '../components/Screen';
 import tailwind from 'tailwind-react-native-classnames';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/authSlice';
+import { auth, app } from "../configs/firebase";
 import { getAuth, updateProfile, updateEmail } from "firebase/auth";
 import colors from '../configs/colors';
+import { getFirestore, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 
 export default function EditProfileScreen({ navigation }) {
-    const user = useSelector(selectUser);
-    const [newName, setNewName] = useState(user?.name);
-    const [newPhoneNumber, setNewPhoneNumber] = useState(user?.phoneNumber);
-    const [newEmail, setNewEmail] = useState(user?.email);
+
     const auth = getAuth();
+    const firestore = getFirestore(app);
+
+    const user = useSelector(selectUser);
+
+    const usersRef = collection(firestore, "users");
+    const userDoc = doc(usersRef, auth.currentUser.uid);
+
+    const [newName, setNewName] = useState(user?.name);
+    const [newPhoneNumber, setNewPhoneNumber] = useState(userDoc?.phoneNumber);
+    const [newEmail, setNewEmail] = useState(user?.email);
 
     const handleUpdateProfile = async () => {
+
         try {
-            // Update profile information
             await updateProfile(auth.currentUser, {
                 displayName: newName,
-                phoneNumber: newPhoneNumber,
             });
 
-            // Update the email if changed
+            if (newPhoneNumber !== user.phoneNumber && newPhoneNumber) {
+
+                await updateDoc(userDoc, {
+                    phoneNumber: newPhoneNumber,
+                });
+            }
+
             if (newEmail !== user.email) {
                 await updateEmail(auth.currentUser, newEmail);
             }
@@ -49,6 +63,7 @@ export default function EditProfileScreen({ navigation }) {
                         placeholder="Numéro de téléphone"
                         placeholderTextColor="grey"
                         value={newPhoneNumber}
+                        keyboardType={'phone-pad'}
                         onChangeText={(text) => setNewPhoneNumber(text)}
                     />
                     <TextInput
