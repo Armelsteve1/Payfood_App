@@ -61,7 +61,6 @@ const DetailsScreen = ({ route, navigation }) => {
                             <Text key={index} style={tailwind`text-xs text-gray-700`}><Text style={{ color: colors.primary }}>•</Text> {title}</Text>
                         ))}
                     </View>
-                    {/* MenuItems */}
                     <MenuItems resName={name} resImage={image_url} />
                 </View>
             </ScrollView>

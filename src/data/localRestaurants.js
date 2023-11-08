@@ -1,6 +1,6 @@
 export const localRestaurants = [
     {
-        name: "Armel Bar",
+        name: "Au Chat Noir",
         image_url:
             "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80",
         categories: ["Cafe", "Bar"],
@@ -15,7 +15,7 @@ export const localRestaurants = [
         review_count: 400
     },
     {
-        name: "Steve",
+        name: "Le Voltaire",
         image_url:
             "https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
         categories: ["Cafe", "Bar"],
@@ -30,7 +30,7 @@ export const localRestaurants = [
         review_count: 346
     },
     {
-        name: "India's Grill",
+        name: "La Vielleuse",
         image_url: "https://images.unsplash.com/photo-1544148103-0773bf10d330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
         categories: ["Indian", "Bar"],
         price: "15€",
@@ -44,9 +44,9 @@ export const localRestaurants = [
         review_count: 7680
     },
     {
-        name: "Kaji kitchen",
+        name: "Oberkafé",
         image_url: "https://images.unsplash.com/photo-1603620214835-31f24c810c1e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80",
-        categories: ["Indian", "Bar"],
+        categories: ["café", "Bar"],
         price: "15€",
         time: "20 - 30",
         reviews: 700,

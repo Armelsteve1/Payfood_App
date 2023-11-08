@@ -195,13 +195,14 @@ const CheckoutScreen = () => {
 
 const styles = StyleSheet.create({
   flex: {
-    flex: 1,
+    flex:1,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   section: {
+    flex:1,
     marginTop: 20,
   },
   title: {
