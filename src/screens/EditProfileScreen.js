@@ -20,7 +20,7 @@ export default function EditProfileScreen({ navigation }) {
     const userDoc = doc(usersRef, auth.currentUser.uid);
 
     const [newName, setNewName] = useState(user?.name);
-    const [newPhoneNumber, setNewPhoneNumber] = useState(userDoc?.phoneNumber);
+    const [newPhoneNumber, setNewPhoneNumber] = useState(user?.phoneNumber);
     const [newEmail, setNewEmail] = useState(user?.email);
 
     const handleUpdateProfile = async () => {
@@ -28,6 +28,7 @@ export default function EditProfileScreen({ navigation }) {
         try {
             await updateProfile(auth.currentUser, {
                 displayName: newName,
+                phoneNumber: newPhoneNumber,
             });
 
             if (newPhoneNumber !== user.phoneNumber && newPhoneNumber) {
@@ -41,9 +42,9 @@ export default function EditProfileScreen({ navigation }) {
                 await updateEmail(auth.currentUser, newEmail);
             }
 
-            Alert.alert('Success', 'Profile updated successfully');
+            Alert.alert('Succès', 'Mis à jour du profil réussie.');
         } catch (error) {
-            Alert.alert('Error', error.message);
+            Alert.alert('Erreur', error.message);
         }
     };
 
@@ -64,14 +65,14 @@ export default function EditProfileScreen({ navigation }) {
                         placeholderTextColor="grey"
                         value={newPhoneNumber}
                         keyboardType={'phone-pad'}
-                        onChangeText={(text) => setNewPhoneNumber(text)}
+                        onChangeText={(number) => setNewPhoneNumber(number)}
                     />
                     <TextInput
                         style={tailwind`border border-gray-300 rounded-md p-2 mt-2`}
                         placeholder="Adresse email"
                         placeholderTextColor="grey"
                         value={newEmail}
-                        onChangeText={(text) => setNewEmail(email)}
+                        onChangeText={(email) => setNewEmail(email)}
                     />
                 </View>
                 <View style={{ justifyContent: 'flex-end', flex: 1 }}>

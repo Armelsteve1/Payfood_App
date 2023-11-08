@@ -8,27 +8,29 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/authSlice'
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { auth } from '../configs/firebase';
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail, deleteUser } from "firebase/auth";
 import EditProfileScreen from './EditProfileScreen';
 import colors from '../configs/colors';
 
 const AccountScreen = ({ navigation }) => {
 
     const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
-    const [isResetPasswordAlertVisible, setIsResetPasswordAlertVisible] = useState(false);
-    const user = useSelector(selectUser);
+    // const [isResetPasswordAlertVisible, setIsResetPasswordAlertVisible] = useState(false);
+
+    // const user = useSelector(selectUser);
+    const auth = getAuth();
+    const user = auth.currentUser;
+
     console.log("user", user)
 
     const toggleEditProfileModal = () => {
         setIsEditProfileModalVisible(!isEditProfileModalVisible);
     };
 
-    const toggleResetPasswordAlert = () => {
-        setIsResetPasswordAlertVisible(!isResetPasswordAlertVisible);
-    };
+    // const toggleResetPasswordAlert = () => {
+    //     setIsResetPasswordAlertVisible(!isResetPasswordAlertVisible);
+    // };
 
-    const auth = getAuth();
 
     const handleSignOut = () => {
         auth
@@ -53,6 +55,28 @@ const AccountScreen = ({ navigation }) => {
             });
     };
 
+    // const user2 = auth.currentUser;
+
+    const handleDelete = () => {
+
+        Alert.alert('Attention', 'Voulez vous vraiment supprimer votre compte définitivement ?', [
+            {
+                text: 'Supprimer',
+                onPress: () =>
+                    deleteUser(user).then(() => {
+                        console.log('delete pressed and account deleted successfully')
+                    }).catch((error) => {
+                        console.log('error while deleting account', error)
+                    })
+            },
+            {
+                text: 'Annuler',
+                onPress: () => console.log('cancel pressed'),
+                style: 'cancel',
+            },
+        ]);
+    };
+
 
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
@@ -62,7 +86,7 @@ const AccountScreen = ({ navigation }) => {
                     <Image source={require('../assets/images/avatar.gif')} style={tailwind`w-48 h-48`} />
                 </View>
                 <View style={tailwind`mt-4 flex-row items-center`}>
-                    <Text style={tailwind`text-3xl font-bold`}>{user?.name}</Text>
+                    <Text style={tailwind`text-3xl font-bold`}>{user?.displayName}</Text>
                     <TouchableOpacity onPress={toggleEditProfileModal} style={{ marginLeft: 10, textDecorationLine: 'none' }}>
                         <Text style={{ textDecorationLine: 'none' }}>
                             <AntDesign name="edit" size={24} color={colors.primary} />
@@ -90,7 +114,10 @@ const AccountScreen = ({ navigation }) => {
                     <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.gray }}>Réinitialiser mon mot de passe</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleSignOut}>
-                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.primary }}>Se déconnecter</Text>
+                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.gray }}>Se déconnecter</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleDelete}>
+                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.denger }}>Supprimer mon compte</Text>
                 </TouchableOpacity>
             </View>
 
@@ -124,7 +151,5 @@ const SavedPlaces = ({ title, text, Icon }) => (
         </View>
     </TouchableOpacity>
 )
-
-
 
 export default AccountScreen;
