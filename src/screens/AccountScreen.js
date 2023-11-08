@@ -9,8 +9,8 @@ import { selectUser } from '../redux/slices/authSlice'
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from '../configs/firebase'
-import { useNavigation } from '@react-navigation/native';
 import EditProfileScreen from './EditProfileScreen';
+import colors from '../configs/colors'
 
 const AccountScreen = ({ navigation }) => {
 
@@ -36,34 +36,38 @@ const AccountScreen = ({ navigation }) => {
 
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
-            <AppHead title={`Account`} icon="settings-outline" />
+            <AppHead title={`Mon compte`} icon="settings-outline" />
             <View style={tailwind`justify-center items-center`}>
                 <View style={tailwind`rounded-full overflow-hidden w-48 h-48 mt-4`}>
                     <Image source={require('../assets/images/avatar.gif')} style={tailwind`w-48 h-48`} />
                 </View>
-                <Text style={tailwind`mt-4 text-3xl font-bold`}>{user?.name}</Text>
-                <Text style={tailwind`text-lg text-indigo-900`}>{user?.email}</Text>
-                <TouchableOpacity onPress={toggleEditProfileModal} style={tailwind`mt-2 ml-2`}>
-                    <AntDesign name="edit" size={24} color="black" />
-                </TouchableOpacity>
-            </View>
+                <View style={tailwind`mt-4 flex-row items-center`}>
+                    <Text style={tailwind`text-3xl font-bold`}>{user?.name}</Text>
+                    <TouchableOpacity onPress={toggleEditProfileModal} style={{ marginLeft: 10, textDecorationLine: 'none' }}>
+                        <Text style={{ textDecorationLine: 'none' }}>
+                            <AntDesign name="edit" size={24} color={colors.primary} />
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <Text style={tailwind`text-lg text-gray-600`}>{user?.email}</Text>
+            </View >
             <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
-                <Text style={tailwind`text-gray-800 mt-2 text-lg mb-2`}>Saved places</Text>
+                <Text style={tailwind`text-gray-800 mt-2 text-lg mb-2`}>Favoris</Text>
                 <SavedPlaces
-                    title="Home"
-                    text="Add home"
-                    Icon={() => <AntDesign name="home" size={24} color="black" />}
+                    title="Accueil"
+                    text="Aller à l'accueil"
+                    Icon={() => <AntDesign name="home" size={24} color={colors.primary} />}
                 />
                 <SavedPlaces
-                    title="Word"
-                    text="Add work"
-                    Icon={() => <Ionicons name="md-briefcase-outline" size={24} color="black" />}
+                    title="Mon porte monnaie"
+                    text="Voir méthodes de paiement disponibles"
+                    Icon={() => <Ionicons name="md-briefcase-outline" size={24} color={colors.primary} />}
                 />
             </View>
             <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
-                <Text style={tailwind`text-gray-800 mt-2 text-lg`}>Other options</Text>
+                <Text style={tailwind`text-gray-800 mt-2 text-lg`}>Autres options</Text>
                 <TouchableOpacity onPress={handleSignOut}>
-                    <Text style={tailwind`text-green-900 mt-2`}>Sign out</Text>
+                    <Text style={{ ...tailwind`text-gray-900 mt-2`, color: colors.primary }}>Se déconnecter</Text>
                 </TouchableOpacity>
             </View>
 
@@ -73,16 +77,13 @@ const AccountScreen = ({ navigation }) => {
                 backdropOpacity={0.7}
                 style={{
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
                 }}
             >
                 <View style={{
-                    width: 300,
-                    height: 400,
+                    width: 280,
+                    height: 300,
                     backgroundColor: 'white',
-                    borderRadius: 10,
-                    // justifyContent: 'center',
-                    // alignItems: 'center'
                 }}>
                     <EditProfileScreen onClose={toggleEditProfileModal} />
                 </View>

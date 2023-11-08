@@ -5,7 +5,6 @@ import tailwind from 'tailwind-react-native-classnames';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/authSlice';
 import { getAuth, updateProfile } from "firebase/auth";
-import { color } from 'react-native-elements/dist/helpers';
 import colors from '../configs/colors'
 
 export default function EditProfileScreen({ navigation }) {
@@ -22,7 +21,6 @@ export default function EditProfileScreen({ navigation }) {
                 phoneNumber: newPhoneNumber
             });
             Alert.alert('Success', 'Profile updated successfully');
-            navigation.navigate('Account');
         } catch (error) {
             Alert.alert('Error', error.message);
         }
@@ -30,28 +28,33 @@ export default function EditProfileScreen({ navigation }) {
 
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
-            <View style={tailwind`p-4`}>
-                <Text style={tailwind`text-3xl font-bold`}>Edit Profile</Text>
-                <TextInput
-                    style={tailwind`border border-gray-300 rounded-md p-2 mt-4`}
-                    placeholder="Name"
-                    value={newName}
-                    onChangeText={(text) => setNewName(text)}
-                />
-                <TextInput
-                    style={tailwind`border border-gray-300 rounded-md p-2 mt-2`}
-                    placeholder="Phone Number"
-                    placeholderTextColor="grey"
-                    value={newPhoneNumber}
-                    onChangeText={(text) => setNewPhoneNumber(text)}
-                />
-                <TouchableOpacity
-                    style={{ backgroundColor: colors.primary, padding: 10, borderRadius: 5, marginTop: 4 }}
-                    onPress={handleUpdateProfile}
-                >
-                    <Text style={tailwind`text-white text-center`}>Update Profile</Text>
-                </TouchableOpacity>
+            <View style={tailwind`flex-1 p-4`}>
+                <View style={tailwind`flex-1`}>
+                    <Text style={tailwind`text-2xl font-bold`}>Modification des informations</Text>
+                    <TextInput
+                        style={tailwind`border border-gray-300 rounded-md p-2 mt-4`}
+                        placeholder="Nom et prénom"
+                        value={newName}
+                        onChangeText={(text) => setNewName(text)}
+                    />
+                    <TextInput
+                        style={tailwind`border border-gray-300 rounded-md p-2 mt-2`}
+                        placeholder="Numéro de téléphone"
+                        placeholderTextColor="grey"
+                        value={newPhoneNumber}
+                        onChangeText={(text) => setNewPhoneNumber(text)}
+                    />
+                </View>
+                <View style={{ justifyContent: 'flex-end', flex: 1 }}>
+                    <TouchableOpacity
+                        style={{ backgroundColor: colors.primary, padding: 10, borderRadius: 5, marginTop: 4 }}
+                        onPress={handleUpdateProfile}
+                    >
+                        <Text style={tailwind`text-white text-center`}>Sauvegarder le profil</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </Screen >
+
     );
 };
