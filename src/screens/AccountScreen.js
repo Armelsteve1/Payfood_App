@@ -82,8 +82,8 @@ const AccountScreen = ({ navigation }) => {
         <Screen style={tailwind`flex-1 bg-white`}>
             <AppHead title={`Mon compte`} icon="settings-outline" />
             <View style={tailwind`justify-center items-center`}>
-                <View style={tailwind`rounded-full overflow-hidden w-48 h-48 mt-4`}>
-                    <Image source={require('../assets/images/avatar.gif')} style={tailwind`w-48 h-48`} />
+                <View style={tailwind`rounded-full overflow-hidden w-40 h-40 mt-2`}>
+                    <Image source={require('../assets/images/avatar.gif')} style={tailwind`w-40 h-40`} />
                 </View>
                 <View style={tailwind`mt-4 flex-row items-center`}>
                     <Text style={tailwind`text-3xl font-bold`}>{user?.displayName}</Text>
