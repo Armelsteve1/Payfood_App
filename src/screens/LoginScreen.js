@@ -28,9 +28,9 @@ function LoginScreenUser({ navigation }) {
 
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        navigation.navigate('Account');
-      })
+      // .then(() => {
+      //   navigation.navigate('HomeScreen');
+      // })
       .catch((error) => {
         if (error.code === "auth/invalid-password") {
           Alert.alert("Error", "Invalid password!")

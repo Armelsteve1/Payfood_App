@@ -1,37 +1,165 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput, Button } from "react-native";
 import { Card } from "react-native-elements";
+import { StatusBar } from "expo-status-bar";
+import { FontAwesome } from "@expo/vector-icons";
+import { Picker } from '@react-native-picker/picker';
+import RealodModal from '../components/ReloadModal'
 
 export default function WalletScreen() {
+  const [selectedTransaction, setSelectedTransaction] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [rechargeAmount, setRechargeAmount] = useState('');
+
+  const transactions = [
+    { label: 'Transaction 1', value: 'transaction1' },
+    { label: 'Transaction 2', value: 'transaction2' },
+  ];
+
+  const openRechargeModal = () => {
+    setModalVisible(true);
+  };
+
+  const handleRecharge = () => {
+    // Faites quelque chose avec la valeur de recharge, par exemple, mettez à jour votre solde.
+    console.log("Montant de recharge :", rechargeAmount);
+    setModalVisible(false);
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Card containerStyle={styles.card}>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>FOOD COINS</Text>
-        </View>
-        <View style={styles.text1Container}>
-          <Text style={styles.text1}>15,00€</Text>
-        </View>
+        <Text style={styles.text}>FOOD COINS</Text>
+        <Text style={styles.text1}>15,00€</Text>
       </Card>
       <View style={styles.main}>
         <Text style={styles.text2}>Food Coins</Text>
       </View>
       <View style={styles.main1}>
-        <Text style={styles.text3}>Recharger vos Food Coins</Text>
+        <Text style={styles.text3}>Reload your Food Coins</Text>
       </View>
       <View>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Recharger</Text>
+        <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
+          <Text style={styles.buttonText}>Reload</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.main}>
+        <Text style={styles.text2}>Method of payment</Text>
+      </View>
+      <View>
+        <TouchableOpacity
+          style={{
+            width: 313,
+            height: 40,
+            flexShrink: 0,
+            borderRadius: 8,
+            backgroundColor: "#F7F7F7",
+            shadowColor: "rgba(0, 0, 0, 0.25)",
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowRadius: 4,
+            shadowOpacity: 2,
+            marginTop: 19,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            style={{
+              color: "#000",
+              fontFamily: "Montserrat",
+              fontSize: 20,
+              fontStyle: "normal",
+              fontWeight: "500",
+              lineHeight: 36,
+              textAlign: 'left'
+            }}
+          >
+            Default
+          </Text>
         </TouchableOpacity>
       </View>
       <View>
+        <TouchableOpacity
+          style={{
+            width: 313,
+            height: 40,
+            flexShrink: 0,
+            borderRadius: 8,
+            backgroundColor: "#F7F7F7",
+            shadowColor: "rgba(0, 0, 0, 0.25)",
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowRadius: 4,
+            shadowOpacity: 2,
+            marginTop: 19,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            style={{
+              color: "#000",
+              fontFamily: "Montserrat",
+              fontSize: 20,
+              fontStyle: "normal",
+              fontWeight: "500",
+              lineHeight: 36,
+              textAlign: 'left'
+            }}
+          >
+            Buy Food Coins
+          </Text>
+        </TouchableOpacity>
       </View>
+      <View style={styles.main}>
+        <Text style={styles.text2}>Other</Text>
+      </View>
+      <View>
+        <Picker
+          selectedValue={selectedTransaction}
+          onValueChange={(itemValue, itemIndex) => setSelectedTransaction(itemValue)}
+          style={{
+            width: 313,
+            height: 40,
+            flexShrink: 0,
+            borderRadius: 8,
+            backgroundColor: '#F7F7F7',
+            shadowColor: 'rgba(0, 0, 0, 0.25)',
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowRadius: 4,
+            shadowOpacity: 2,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 19,
+          }}
+        >
+          {transactions.map((transaction) => (
+            <Picker.Item key={transaction.value} label={transaction.label} value={transaction.value} />
+          ))}
+        </Picker>
+      </View>
+
+      <Modal visible={modalVisible} animationType="slide" transparent={true}>
+                <RealodModal setModalVisible={setModalVisible} />
+      </Modal>
       <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -39,32 +167,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   card: {
-    width: "90%",
-    height: 200,
-    marginTop: -100,
-    borderRadius: 10,
-    borderColor: "#fff",
-    borderWidth: 1,
+    width: 317,
+    height: 166,
+    flexShrink: 0,
+    borderRadius: 8,
     backgroundColor: "#FF3C6E",
-    elevation: 0,
-  },
-  textContainer: {
-    textAlign: "center",
-    paddingTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
   text: {
-    fontWeight: "bold",
-    fontSize: 18,
-    color: "#fff",
-  },
-  text1Container: {
-    textAlign: "center",
-    marginTop: 10,
+    color: "#FFF",
+    fontFamily: "Montserrat",
+    fontSize: 16,
+    fontWeight: "700",
+    textTransform: "uppercase",
   },
   text1: {
-    fontWeight: "bold",
-    fontSize: 38,
-    color: "#fff",
+    color: "#FFF",
+    fontFamily: "Montserrat",
+    fontSize: 32,
+    fontWeight: "700",
+    textTransform: "uppercase",
   },
   text2: {
     fontWeight: "bold",
@@ -75,6 +198,9 @@ const styles = StyleSheet.create({
   },
   text3: {
     opacity: 0.5,
+    fontWeight: "bold",
+    fontSize: 18,
+    color: "black",
   },
   main: {
     marginTop: 20,
@@ -84,24 +210,22 @@ const styles = StyleSheet.create({
   main1: {
     marginTop: 20,
   },
-  text3: {
-    fontWeight: "bold",
-    fontSize: 18,
-    color: "black",
-  },
   button: {
-    height: 40,
+    display: "flex",
+    width: 143,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 10,
+    borderRadius: 99,
     backgroundColor: "#FF3C6E",
-    padding: 10,
-    marginTop: 20,
-    borderRadius: 10,
-    marginHorizontal: 5,
-    width: "95%",
+    marginTop:19
   },
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
-    textAlign: "center",
     fontSize: 16,
   },
-});
+};
