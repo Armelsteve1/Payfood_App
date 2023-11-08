@@ -18,7 +18,6 @@ const AccountScreen = ({ navigation }) => {
     const toggleEditProfileModal = () => {
         setIsEditProfileModalVisible(!isEditProfileModalVisible);
     };
-    const user = useSelector(selectUser)
 
     console.log('auth', auth);
     console.log('user', user);
