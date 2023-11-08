@@ -6,7 +6,8 @@ import colors from "../configs/colors";
 import * as yup from "yup";
 import AppFormFeilds from "../components/forms/AppFormFeilds";
 import AppSubmitButton from "../components/forms/AppSubmitButton";
-import { auth } from "../configs/firebase";
+import { auth, app } from "../configs/firebase";
+import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import tailwind from 'tailwind-react-native-classnames';
 
@@ -43,23 +44,34 @@ function SignupScreen({ navigation }) {
   console.log("authInitialized", authInitialized);
 
 
-  const signUpUser = ({ name, email, password }) => {
+  const signUpUser = async ({ name, email, password }) => {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        navigation.navigate('UserLogin');
-      })
-      .catch((error) => {
-        if (error.code === "auth/email-already-in-use") {
-          Alert.alert("Error", "That email address is already in use!")
-        }
+    const firestore = getFirestore(app);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-        if (error.code === "auth/invalid-email") {
-          Alert.alert("Error", "That email address is invalid!")
-        }
+      // After successful signup, update user's profile with name
+      await updateProfile(user, { displayName: name });
 
-        Alert.alert('ERROR: ', error.message);
+      // Save user data to Firestore
+      const usersRef = collection(firestore, "users");
+      const userDoc = doc(usersRef, user.uid);
+
+      await setDoc(userDoc, {
+        name: name,
+        email: email,
       });
+
+      console.log("User data saved to Firestore");
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        Alert.alert("Error", "That email address is already in use!");
+      } else if (error.code === "auth/invalid-email") {
+        Alert.alert("Error", "That email address is invalid!");
+      }
+      Alert.alert("ERROR:", error.message);
+    }
   };
 
   return (

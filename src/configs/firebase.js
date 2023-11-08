@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getAnalytics, isSupported } from "firebase/analytics";
+import { initializeAuth, getReactNativePersistence } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+// import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMFzvO7mmZTA7-yUinI5Et6vzelTyj4a0",
@@ -12,25 +13,27 @@ const firebaseConfig = {
   storageBucket: "payfood-7925c.appspot.com",
   messagingSenderId: "586328239954",
   appId: "1:586328239954:web:f00b8d2450e0c1b1a9148b",
-  measurementId: "G-129T1FR4RZ"
+  measurementId: "G-129T1FR4RZ",
 };
 
 const app = initializeApp(firebaseConfig);
 
-if (isSupported()) {
-  const analytics = getAnalytics(app);
-  console.log("Firebase Analytics is supported");
-} else {
-  console.warn("Firebase Analytics is not supported in this environment");
-}
+// if (isSupported()) {
+//   const analytics = getAnalytics(app);
+//   console.log("Firebase Analytics is supported");
+// } else {
+//   console.warn("Firebase Analytics is not supported in this environment");
+// }
 
 const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage)
+  persistence: getReactNativePersistence(AsyncStorage),
 });
 
+const firestore = getFirestore(app);
 
-console.log("Firebase initialized successfully");
-console.log("auth", auth);
 console.log("app", app);
+console.log("auth", auth);
+console.log("firestore", firestore);
+console.log("Firebase initialized successfully");
 
-export { auth, app, createUserWithEmailAndPassword, signInWithEmailAndPassword };
+export { auth, app, createUserWithEmailAndPassword, signInWithEmailAndPassword, firestore };

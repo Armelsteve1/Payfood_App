@@ -28,7 +28,7 @@ const CartScreen = () => {
                         <Text style={styles.totalAmount}>${totalPrice}</Text>
                     </View>
                     <View style={styles.right}>
-                        <AppButton title="Checkout" onPress={() => setModalVisible(true)} color="black" />
+                        <AppButton title="Checkout" onPress={() => setModalVisible(true)} color="#FF3C6E" />
                     </View>
                 </View>
             )}
