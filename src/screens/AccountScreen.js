@@ -18,9 +18,7 @@ import colors from '../configs/colors';
 const AccountScreen = ({ navigation }) => {
 
     const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
-    // const [isResetPasswordAlertVisible, setIsResetPasswordAlertVisible] = useState(false);
 
-    // const user = useSelector(selectUser);
     const auth = getAuth();
     const user = auth.currentUser;
 
@@ -29,11 +27,6 @@ const AccountScreen = ({ navigation }) => {
     const toggleEditProfileModal = () => {
         setIsEditProfileModalVisible(!isEditProfileModalVisible);
     };
-
-    // const toggleResetPasswordAlert = () => {
-    //     setIsResetPasswordAlertVisible(!isResetPasswordAlertVisible);
-    // };
-
 
     const handleSignOut = () => {
         auth
