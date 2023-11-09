@@ -17,7 +17,7 @@ const ViewCart = ({ total, count }) => {
             ]}
           >
             <Text style={tailwind`text-white text-sm`}>
-              View Cart • ${total} ({count})
+            Voir le panier €{total} ({count})
             </Text>
           </TouchableOpacity>
         )}

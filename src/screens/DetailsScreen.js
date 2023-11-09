@@ -50,8 +50,8 @@ const DetailsScreen = ({ route, navigation }) => {
                                 <Text style={styles.infoText}>20-30 min</Text>
                             </View>
                             <View style={styles.infoItem}>
-                                <Foundation name="euro" size={16} color={colors.primary} />
-                                <Text style={styles.infoText}> {price}</Text>
+                                <Foundation name="dollar" size={16} color={colors.primary} />
+                                <Text style={styles.infoText}>• {price}</Text>
                             </View>
                         </View>
                     </View>
