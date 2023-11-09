@@ -22,6 +22,11 @@ function AccountSettingsScreen({ navigation }) {
 
     const [privacySettings, setPrivacySettings] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
+    const [helpModalVisible, setHelpModalVisible] = useState(false);
+
+    const toggleHelpModal = () => {
+        setHelpModalVisible(!helpModalVisible);
+    };
 
     const savePreferences = async () => {
         try {
@@ -81,6 +86,12 @@ function AccountSettingsScreen({ navigation }) {
                             />
                         </View>
                     </View>
+                    <TouchableOpacity onPress={toggleHelpModal}>
+                        <View style={styles.preferenceItem}>
+                            <Text>Aide et Support</Text>
+                            <Ionicons name="help-circle-outline" size={24} color={colors.primary} />
+                        </View>
+                    </TouchableOpacity>
                 </ScrollView>
                 <AppButton title="Enregistrer mes préférences" onPress={() => savePreferences()} />
             </View >
@@ -112,6 +123,23 @@ function AccountSettingsScreen({ navigation }) {
                         <AppButton
                             title="Fermer"
                             onPress={() => setModalVisible(false)}
+                        />
+                    </View>
+                </View>
+            </Modal>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={helpModalVisible}
+                onRequestClose={() => setHelpModalVisible(false)}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalTitle}>Aide et Support</Text>
+                        {/* Add your contact form components here */}
+                        <AppButton
+                            title="Fermer"
+                            onPress={toggleHelpModal}
                         />
                     </View>
                 </View>
