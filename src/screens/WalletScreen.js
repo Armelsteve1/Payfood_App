@@ -2,23 +2,18 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView, Modal, TextInput, Button } from "react-native";
 import { Card } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
-import { FontAwesome } from "@expo/vector-icons";
 import { Picker } from '@react-native-picker/picker';
 import RealodModal from '../components/ReloadModal'
 
 export default function WalletScreen() {
   const [selectedTransaction, setSelectedTransaction] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [rechargeAmount, setRechargeAmount] = useState('');
+  const [rechargeAmount] = useState('');
 
   const transactions = [
     { label: 'Transaction 1', value: 'transaction1' },
     { label: 'Transaction 2', value: 'transaction2' },
   ];
-
-  const openRechargeModal = () => {
-    setModalVisible(true);
-  };
 
   const handleRecharge = () => {
     console.log("Montant de recharge :", rechargeAmount);
@@ -35,16 +30,16 @@ export default function WalletScreen() {
         <Text style={styles.text2}>Food Coins</Text>
       </View>
       <View style={styles.main1}>
-        <Text style={styles.text3}>Reload your Food Coins</Text>
+        <Text style={styles.text3}>Rechargez vos Food Coins</Text>
       </View>
       <View>
         <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
-          <Text style={styles.buttonText}>Reload</Text>
+          <Text style={styles.buttonText}>Rechargez</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.main}>
-        <Text style={styles.text2}>Method of payment</Text>
+        <Text style={styles.text2}>Mode de paiement</Text>
       </View>
       <View>
         <TouchableOpacity
@@ -77,7 +72,7 @@ export default function WalletScreen() {
               textAlign: 'left'
             }}
           >
-            Default
+            Défaut
           </Text>
         </TouchableOpacity>
       </View>
@@ -112,12 +107,12 @@ export default function WalletScreen() {
               textAlign: 'left'
             }}
           >
-            Buy Food Coins
+            Achetez un Food Coins
           </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.main}>
-        <Text style={styles.text2}>Other</Text>
+        <Text style={styles.text2}>Autres</Text>
       </View>
       <View>
         <Picker

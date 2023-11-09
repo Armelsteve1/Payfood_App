@@ -48,7 +48,6 @@ const HomeScreen = () => {
 
     return (
         <Screen style={tailwind`bg-white flex-1`}>
-            {/* <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} /> */}
             <SearchBar setCity={setCity} city={city} />
             <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
                 <Categories />

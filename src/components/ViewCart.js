@@ -10,7 +10,7 @@ const ViewCart = ({ total, count }) => {
         <>
         {!!count && (
           <TouchableOpacity
-            onPress={() => navigation.navigate("Cart")}
+            onPress={() => navigation.navigate("Panier")}
             style={[
               tailwind`bg-black absolute bottom-4 self-center py-3 px-12 rounded-full z-50`,
               { backgroundColor: "#FF3C6E" }

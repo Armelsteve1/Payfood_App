@@ -29,33 +29,33 @@ const MainTabNavigator = () => {
                 },
             }}
         >
-            <Tab.Screen name="Home" component={HomeScreen}
+            <Tab.Screen name="Accueil" component={HomeScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <AntDesign name="home" color={color} size={size} />
                     )
                 }}
             />
-            <Tab.Screen name="Browse" component={BrowseScreen}
+            <Tab.Screen name="Parcourir" component={BrowseScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="md-search-sharp" color={color} size={size} />
                     )
                 }}
             />
-            <Tab.Screen name="Cart" component={CartScreen}
+            <Tab.Screen name="Panier" component={CartScreen}
                 options={({ navigation }) => ({
-                    tabBarButton: () => <TabCartButton onPress={() => navigation.navigate('Cart')} />
+                    tabBarButton: () => <TabCartButton onPress={() => navigation.navigate('Panier')} />
                 })}
             />
-            <Tab.Screen name="Wallet" component={WalletScreen}
+            <Tab.Screen name="Portefeuille" component={WalletScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Feather name="credit-card" color={color} size={size} />
                     )
                 }}
             />
-            <Tab.Screen name="Account" component={AccountScreen}
+            <Tab.Screen name="Compte" component={AccountScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Feather name="user" color={color} size={size} />
