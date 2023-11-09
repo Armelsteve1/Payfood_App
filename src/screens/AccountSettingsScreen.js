@@ -58,7 +58,7 @@ function AccountSettingsScreen({ navigation }) {
                     [
                         {
                             text: "Annuler",
-                            onPress: () => reject("Cancel pressed on contact"),
+                            onPress: () => reject(new Error("Cancel pressed on contact")),
                             style: "cancel"
                         },
                         {
@@ -70,7 +70,7 @@ function AccountSettingsScreen({ navigation }) {
                 );
             });
 
-            if (messageInput) {
+            if (messageInput !== undefined) {
                 setMessage(messageInput);
 
                 const userDocRef = doc(firestore, 'users', user.uid);
@@ -93,10 +93,15 @@ function AccountSettingsScreen({ navigation }) {
                 }
             }
         } catch (error) {
-            console.error('Error sending message:', error.message);
-            Alert.alert('Erreur', 'Une erreur s\'est produite lors de l\'envoi du message.');
+            if (error.message === "Cancel pressed on contact") {
+                console.log('User canceled the message.');
+            } else {
+                console.error('Error sending message:', error.message);
+                Alert.alert('Erreur', 'Une erreur s\'est produite lors de l\'envoi du message.');
+            }
         }
     };
+
 
 
 
