@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Switch, Text, ScrollView, Alert, TouchableOpacity, Modal } from 'react-native';
 import { getAuth, updateProfile } from 'firebase/auth';
-import { getFirestore, doc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, updateDoc, collection, addDoc, getDoc } from 'firebase/firestore';
 import AppButton from '../components/AppButton';
 import AppHead from '../components/AppHead';
 import Screen from '../components/Screen';
@@ -23,6 +23,8 @@ function AccountSettingsScreen({ navigation }) {
     const [privacySettings, setPrivacySettings] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
     const [helpModalVisible, setHelpModalVisible] = useState(false);
+
+    const [message, setMessage] = useState('');
 
     const toggleHelpModal = () => {
         setHelpModalVisible(!helpModalVisible);
@@ -47,27 +49,56 @@ function AccountSettingsScreen({ navigation }) {
         }
     };
 
-    const sendMessage = () => {
-        Alert.prompt(
-            "Contactez-nous",
-            "Laissez nous un message et notre équipe vous contactera le plutôt possible",
-            [
-                {
-                    text: "Annuler",
-                    onPress: () => console.log("Cancel pressed on contact"),
-                    style: "cancel"
-                },
-                {
-                    text: "Envoyer",
-                    onPress: () =>
-                        updateDoc(userDoc, {
-                            message: message,
-                        })
+    const sendMessage = async () => {
+        try {
+            const messageInput = await new Promise((resolve, reject) => {
+                Alert.prompt(
+                    "Contactez-nous",
+                    "Laissez-nous un message et notre équipe vous contactera le plus tôt possible !",
+                    [
+                        {
+                            text: "Annuler",
+                            onPress: () => reject("Cancel pressed on contact"),
+                            style: "cancel"
+                        },
+                        {
+                            text: "Envoyer",
+                            onPress: (input) => resolve(input)
+                        }
+                    ],
+                    "plain-text"
+                );
+            });
+
+            if (messageInput) {
+                setMessage(messageInput);
+
+                const userDocRef = doc(firestore, 'users', user.uid);
+                const userDocSnapshot = await getDoc(userDocRef);
+
+                if (userDocSnapshot.exists()) {
+                    const userPhoneNumber = userDocSnapshot.data().phoneNumber;
+
+                    const contactCollectionRef = collection(firestore, 'contact');
+                    await addDoc(contactCollectionRef, {
+                        message: messageInput,
+                        userEmail: user.email,
+                        userName: user.displayName,
+                        userPhoneNumber: userPhoneNumber,
+                    });
+
+                    Alert.alert('Succès', 'Message envoyé avec succès. A très bientôt !');
+                } else {
+                    Alert.alert('Erreur', 'Le document utilisateur n\'existe pas.');
                 }
-            ],
-            "secure-text"
-        );
+            }
+        } catch (error) {
+            console.error('Error sending message:', error.message);
+            Alert.alert('Erreur', 'Une erreur s\'est produite lors de l\'envoi du message.');
+        }
     };
+
+
 
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
