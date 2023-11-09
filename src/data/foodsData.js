@@ -2,7 +2,7 @@ export const foods = [
     {
         id: 'KKD1',
         title: "Lasagna",
-        description: "With butter lettuce, tomato and sauce bechamel",
+        description: "Avec laitue beurre, tomate et sauce béchamel",
         price: 13.5,
         image: "https://www.modernhoney.com/wp-content/uploads/2019/08/Classic-Lasagna-14-scaled.jpg",
     },

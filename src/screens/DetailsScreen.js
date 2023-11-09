@@ -50,15 +50,15 @@ const DetailsScreen = ({ route, navigation }) => {
                                 <Text style={styles.infoText}>20-30 min</Text>
                             </View>
                             <View style={styles.infoItem}>
-                                <Foundation name="dollar" size={16} color={colors.primary} />
-                                <Text style={styles.infoText}>• {price}</Text>
+                                <Foundation name="euro" size={16} color={colors.primary} />
+                                <Text style={styles.infoText}> {price}</Text>
                             </View>
                         </View>
                     </View>
                     <View style={tailwind`mt-3`}>
                         <Text style={[tailwind`text-gray-800 font-bold border-b w-1/3 mb-2 pb-1`, { borderBottomColor: colors.primary, fontSize: 17 }]}>Categories</Text>
                         {categories.map(({ title }, index) => (
-                            <Text key={index} style={tailwind`text-xs text-gray-700`}><Text style={{ color: colors.primary }}>•</Text> {title}</Text>
+                            <Text key={index} style={tailwind`text-xs text-gray-700`}><Text style={{ color: colors.primary }}></Text> {title}</Text>
                         ))}
                     </View>
                     <MenuItems resName={name} resImage={image_url} />
