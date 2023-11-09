@@ -13,8 +13,8 @@ function JoinScreen({ navigation }) {
                 <Image style={styles.logo} source={require("../assets/logo.png")} />
                 <View style={styles.content}>
                     <Text style={styles.title}>Payfood</Text>
-                    <Text style={styles.subTitle}>Manger bio et gagner de l'argent</Text>
-                    <AppButton title="Let's go" onPress={() => navigation.navigate("Signup")} />
+                    <Text style={styles.subTitle}>Manger bio en gagnant de l'argent.</Text>
+                    <AppButton title="Allons-y !" onPress={() => navigation.navigate("Signup")} />
                 </View>
             </ImageBackground>
         </View>
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         height: 200,
+        width: 150,
         resizeMode: 'contain',
         alignSelf: "center",
         position: 'absolute',
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
+        resizeMode: "contain",
         justifyContent: 'flex-end',
     },
     content: {

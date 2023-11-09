@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Screen from '../components/Screen';
 import tailwind from 'tailwind-react-native-classnames';
@@ -7,24 +7,43 @@ import { selectUser } from '../redux/slices/authSlice';
 import { auth, app } from "../configs/firebase";
 import { getAuth, updateProfile, updateEmail } from "firebase/auth";
 import colors from '../configs/colors';
-import { getFirestore, collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
+
 
 export default function EditProfileScreen({ navigation }) {
-
     const auth = getAuth();
     const firestore = getFirestore(app);
 
-    const user = useSelector(selectUser);
+    const user = auth.currentUser;
 
     const usersRef = collection(firestore, "users");
     const userDoc = doc(usersRef, auth.currentUser.uid);
 
-    const [newName, setNewName] = useState(user?.name);
-    const [newPhoneNumber, setNewPhoneNumber] = useState(user?.phoneNumber);
+    const [newName, setNewName] = useState(user?.displayName);
+    const [newPhoneNumber, setNewPhoneNumber] = useState('');
     const [newEmail, setNewEmail] = useState(user?.email);
 
-    const handleUpdateProfile = async () => {
+    const getUserData = async () => {
+        try {
+            const userDocSnapshot = await getDoc(userDoc);
 
+            if (userDocSnapshot.exists()) {
+                const userPhoneNumber = userDocSnapshot.data().phoneNumber;
+                setNewPhoneNumber(userPhoneNumber);
+            } else {
+                Alert.alert('Erreur', 'Le document utilisateur n\'existe pas.');
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error.message);
+            Alert.alert('Erreur', 'Une erreur s\'est produite lors de la récupération des données utilisateur.');
+        }
+    };
+
+    useEffect(() => {
+        getUserData();
+    }, []);
+
+    const handleUpdateProfile = async () => {
         try {
             await updateProfile(auth.currentUser, {
                 displayName: newName,
@@ -32,7 +51,6 @@ export default function EditProfileScreen({ navigation }) {
             });
 
             if (newPhoneNumber !== user.phoneNumber && newPhoneNumber) {
-
                 await updateDoc(userDoc, {
                     phoneNumber: newPhoneNumber,
                 });
@@ -42,7 +60,7 @@ export default function EditProfileScreen({ navigation }) {
                 await updateEmail(auth.currentUser, newEmail);
             }
 
-            Alert.alert('Succès', 'Mis à jour du profil réussie.');
+            Alert.alert('Succès', 'Mise à jour du profil réussie.');
         } catch (error) {
             Alert.alert('Erreur', error.message);
         }
@@ -56,6 +74,7 @@ export default function EditProfileScreen({ navigation }) {
                     <TextInput
                         style={tailwind`border border-gray-300 rounded-md p-2 mt-4`}
                         placeholder="Nom et prénom"
+                        placeholderTextColor="grey"
                         value={newName}
                         onChangeText={(text) => setNewName(text)}
                     />
