@@ -26,6 +26,8 @@ function AccountSettingsScreen({ navigation }) {
 
     const [message, setMessage] = useState('');
 
+    const [feedbackRating, setFeedbackRating] = useState(0);
+
     const toggleHelpModal = () => {
         setHelpModalVisible(!helpModalVisible);
     };
@@ -150,6 +152,20 @@ function AccountSettingsScreen({ navigation }) {
                             <Ionicons name="help-circle-outline" size={24} color={colors.primary} />
                         </View>
                     </TouchableOpacity>
+                    <View style={styles.feedbackSection}>
+                        <Text>Evaluez notre service</Text>
+                        <View style={styles.starRating}>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <TouchableOpacity key={star} onPress={() => setFeedbackRating(star)}>
+                                    <Ionicons
+                                        name={star <= feedbackRating ? 'star' : 'star-outline'}
+                                        size={30}
+                                        color={colors.primary}
+                                    />
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                    </View>
                 </ScrollView>
                 <AppButton title="Enregistrer mes préférences" onPress={() => savePreferences()} />
             </View >
@@ -240,6 +256,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
+    },
+    feedbackSection: {
+        marginTop: 20,
+        marginBottom: 20,
+    },
+    starRating: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
     },
 });
 
