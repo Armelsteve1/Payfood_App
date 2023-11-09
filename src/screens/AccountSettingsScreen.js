@@ -29,6 +29,7 @@ function AccountSettingsScreen({ navigation }) {
                 newsletter: newsletter,
                 notifSms: notifSms,
                 notifEmail: notifEmail,
+                privacySettings: privacySettings,
             });
 
             await updateProfile(auth.currentUser, {
@@ -56,13 +57,15 @@ function AccountSettingsScreen({ navigation }) {
                     </TouchableOpacity>
                     <View style={styles.checkbox}>
                         <View style={styles.preferenceItem}>
-                            <Text>S'abonner à la newsletter</Text>
+                            {/* <Ionicons name="notifications-outline" size={24} color={colors.black} /> */}
+                            <Text>S'abonner à notre newsletter</Text>
                             <Switch
                                 value={newsletter}
                                 onValueChange={(value) => setNewsletter(value)}
                             />
                         </View>
                         <View style={styles.preferenceItem}>
+                            {/* <Ionicons name="call" size={24} color={colors.black} /> */}
                             <Text>Recevoir les notifications par sms</Text>
                             <Switch
                                 value={notifSms}
@@ -70,6 +73,7 @@ function AccountSettingsScreen({ navigation }) {
                             />
                         </View>
                         <View style={styles.preferenceItem}>
+                            {/* <Ionicons name="mail-outline" size={24} color={colors.black} /> */}
                             <Text>Recevoir les notifications par email</Text>
                             <Switch
                                 value={notifEmail}
@@ -79,7 +83,7 @@ function AccountSettingsScreen({ navigation }) {
                     </View>
                 </ScrollView>
                 <AppButton title="Enregistrer mes préférences" onPress={() => savePreferences()} />
-            </View>
+            </View >
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -112,7 +116,7 @@ function AccountSettingsScreen({ navigation }) {
                     </View>
                 </View>
             </Modal>
-        </Screen>
+        </Screen >
     );
 }
 

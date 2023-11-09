@@ -10,8 +10,6 @@ import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { getAuth, sendPasswordResetEmail, deleteUser } from "firebase/auth";
 import EditProfileScreen from './EditProfileScreen';
-import AccountSettingsScreen from './AccountSettingsScreen';
-
 
 import colors from '../configs/colors';
 
