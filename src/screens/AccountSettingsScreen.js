@@ -47,6 +47,28 @@ function AccountSettingsScreen({ navigation }) {
         }
     };
 
+    const sendMessage = () => {
+        Alert.prompt(
+            "Contactez-nous",
+            "Laissez nous un message et notre équipe vous contactera le plutôt possible",
+            [
+                {
+                    text: "Annuler",
+                    onPress: () => console.log("Cancel pressed on contact"),
+                    style: "cancel"
+                },
+                {
+                    text: "Envoyer",
+                    onPress: () =>
+                        updateDoc(userDoc, {
+                            message: message,
+                        })
+                }
+            ],
+            "secure-text"
+        );
+    };
+
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
             <AppHead title={`Mes préférences`} icon="build-outline" />
@@ -86,7 +108,7 @@ function AccountSettingsScreen({ navigation }) {
                             />
                         </View>
                     </View>
-                    <TouchableOpacity onPress={toggleHelpModal}>
+                    <TouchableOpacity onPress={sendMessage}>
                         <View style={styles.preferenceItem}>
                             <Text>Aide et Support</Text>
                             <Ionicons name="help-circle-outline" size={24} color={colors.primary} />
@@ -136,7 +158,6 @@ function AccountSettingsScreen({ navigation }) {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <Text style={styles.modalTitle}>Aide et Support</Text>
-                        {/* Add your contact form components here */}
                         <AppButton
                             title="Fermer"
                             onPress={toggleHelpModal}
