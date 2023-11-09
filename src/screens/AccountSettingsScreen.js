@@ -47,10 +47,9 @@ function AccountSettingsScreen({ navigation }) {
             <View style={styles.container}>
                 <ScrollView contentContainerStyle={styles.scrollView}>
                     <TouchableOpacity
-                        style={styles.preferenceItem}
                         onPress={() => setModalVisible(true)}
                     >
-                        <View style={styles.preferenceItemText}>
+                        <View style={styles.preferenceItem}>
                             <Text>Paramètres de confidentialité</Text>
                             <Ionicons name="information-circle" size={24} color={colors.primary} />
                         </View>
@@ -90,24 +89,21 @@ function AccountSettingsScreen({ navigation }) {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <Text style={styles.modalTitle}>Paramètres de confidentialité</Text>
-                        {/* <Text>Here you can allow or refuse certain privacy settings</Text>
-                        <Switch
-                            value={privacySettings}
-                            onValueChange={(value) => setPrivacySettings(value)}
-                        /> */}
-                        <View style={styles.preferenceItem}>
-                            <Text>Payfood utilise les cookies pour améliorer son application.
+                        <View style={styles.preferenceItemText}>
+                            <Text style={{ textAlign: 'justify' }}>Payfood utilise les cookies pour améliorer son application.
                                 Certains sont nécessaires au bon fonctionnement de l'application et des services, tandis que d'autres sont facultatifs et destinés à personnaliser votre expérience, comme les cookies publicitaires ou d'analytics.
                                 Vous pouvez accepter tous les cookies, refuser tous les cookies facultatifs, ou paramétrer les cookies en fonction de vos préférences.
                                 En l'absence de sélection, les paramètres de cookies par défaut s'appliqueront.
                                 Vous pouvez modifier vos préférences à tout moment.
                                 Pour en savoir plus, consultez la politique relative aux cookies de Payfood.
                             </Text>
-                            <Switch
-                                text="Accepter les cookies"
-                                value={privacySettings}
-                                onValueChange={(value) => setPrivacySettings(value)}
-                            />
+                            <View style={styles.preferenceItem}>
+                                <Text>Accepter les cookies</Text>
+                                <Switch
+                                    value={privacySettings}
+                                    onValueChange={(value) => setPrivacySettings(value)}
+                                />
+                            </View>
                         </View>
                         <AppButton
                             title="Fermer"
@@ -138,11 +134,6 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-    },
-    preferenceItemText: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
     },
     modalContainer: {
         flex: 1,
