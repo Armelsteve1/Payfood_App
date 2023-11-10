@@ -9,7 +9,7 @@ import { Input } from 'react-native-elements';
 const RealodModal = ({ setModalVisible }) => {
     const totalPrice = useSelector(selectTotalPrice)
     const navigation = useNavigation()
-    const [rechargeAmount, setRechargeAmount] = useState(''); // État pour stocker le montant de recharge
+    const [rechargeAmount, setRechargeAmount] = useState('');
 
     const addOrder = () => {
         setModalVisible(false)
@@ -18,7 +18,7 @@ const RealodModal = ({ setModalVisible }) => {
 
     const updateTotalPrice = (amount) => {
         const newTotalPrice = totalPrice + parseFloat(amount);
-        return newTotalPrice // Assurez-vous que le total a deux décimales
+        return newTotalPrice 
     }
 
     return (
@@ -28,9 +28,9 @@ const RealodModal = ({ setModalVisible }) => {
                 <Text style={tailwind`text-black text-center text-xl font-bold mb-5`}>Checkout details</Text>
                 <View style={tailwind`mb-5`}>
                     <Input
-                        label="Total price"
-                        value={updateTotalPrice(rechargeAmount)} // Mettez à jour la valeur du champ Input
-                        onChangeText={(text) => setRechargeAmount(text)} // Mettez à jour l'état du montant de recharge
+                        label="Total Prix"
+                        value={updateTotalPrice(rechargeAmount)}
+                        onChangeText={(text) => setRechargeAmount(text)} 
                         keyboardType="numeric"
                     />
                 </View>
@@ -38,7 +38,7 @@ const RealodModal = ({ setModalVisible }) => {
                     }
                     onPress={addOrder}
                 >
-                    <Text style={tailwind`text-white`}>Checkout</Text>
+                    <Text style={tailwind`text-white`}>Payer</Text>
                 </TouchableOpacity>
             </View>
         </View>

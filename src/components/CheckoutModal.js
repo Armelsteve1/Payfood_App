@@ -18,25 +18,30 @@ const CheckoutModal = ({ setModalVisible }) => {
     return (
         <View style={tailwind`flex-1 bg-black bg-opacity-40`}>
             <TouchableOpacity style={tailwind`flex-grow`} onPress={() => setModalVisible(false)}>
-
             </TouchableOpacity>
             <View style={tailwind`pb-5  w-full px-4 bg-white pt-4`}>
-                <Text style={tailwind`text-black text-center text-xl font-bold mb-5`}>Checkout details</Text>
+                <Text style={tailwind`text-black text-center text-xl font-bold mb-5`}>Détails des prix</Text>
                 <View style={tailwind`mb-5`}>
                     {allCartItems?.map(item => (
-                        <OrderItem key={item.resName} name={item.resName} value={`$${item?.foods.reduce((total, item) => total + item.price, 0).toFixed(1)} • (${item?.foods?.length})`} />
+                        <OrderItem
+                        key={item.resName}
+                        name={item.resName}
+                        value={`€${item?.foods.reduce((total, item) => total + item.price, 0).toFixed(1)} • (${item?.foods?.length})`}
+                        />
                     ))}
-                    <OrderItem name="Total price" value={`$€{totalPrice}`} total />
+                    <OrderItem name="Total price" value={`€${totalPrice}`} total />
                 </View>
-                <TouchableOpacity style={[tailwind`py-3 px-10 self-center rounded-full`, { backgroundColor: "#FF3C6E" }]}
-                    onPress={addOrder}
-                    >
-                 <Text style={tailwind`text-white`}>Checkout</Text>
-                </TouchableOpacity>
-                            </View>
-                        </View>
-                    );
-                }
+            <TouchableOpacity
+                style={[tailwind`py-3 px-10 self-center rounded-full`, { backgroundColor: "#FF3C6E" }]}
+                onPress={addOrder}
+                >
+                <Text style={tailwind`text-white`}>Payer</Text>
+            </TouchableOpacity>
+
+            </View>
+        </View>
+    );
+}
 
 export default CheckoutModal;
 

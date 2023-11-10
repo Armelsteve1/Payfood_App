@@ -93,12 +93,12 @@ const AccountScreen = ({ navigation }) => {
                     <SavedPlaces
                         title="Accueil"
                         text="Aller à l'accueil"
-                        Icon={() => <AntDesign name="home" size={24} color={colors.primary} onPress={() => navigation.navigate('Home')} />}
+                        Icon={() => <AntDesign name="home" size={24} color={colors.primary} onPress={() => navigation.navigate('Accueil')} />}
                     />
                     <SavedPlaces
                         title="Mon porte monnaie"
                         text="Voir méthodes de paiement disponibles"
-                        Icon={() => <Ionicons name="wallet" size={24} color={colors.primary} onPress={() => navigation.navigate('Wallet')} />}
+                        Icon={() => <Ionicons name="wallet" size={24} color={colors.primary} onPress={() => navigation.navigate('Portefeuille')} />}
                     />
                     <SavedPlaces
                         title="Mes préférences"

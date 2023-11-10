@@ -16,7 +16,7 @@ function SuccessScreen() {
                 <Text style={styles.title}>Congratulations!!!</Text>
                 <Text style={styles.text}>Your order have been taken successfully!</Text>
                 <View style={styles.buttons}>
-                    <AppButton onPress={() => navigation.navigate('Home')} title="Continue shopping" color="black" />
+                    <AppButton onPress={() => navigation.navigate('Accueil')} title="Continue shopping" color="black" />
                 </View>
             </View>
         </Screen>

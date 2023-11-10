@@ -104,7 +104,6 @@ const CheckoutScreen = () => {
     if (error) {
       Alert.alert('Payment faild', `Error code: ${error.code}`, error.message);
     } else {
-      // Success;
       addOrder()
       setPaymentSheetEnabled(false);
     }
@@ -112,8 +111,6 @@ const CheckoutScreen = () => {
   };
 
   useEffect(() => {
-    // In your app’s checkout, make a network request to the backend and initialize PaymentSheet.
-    // To reduce loading time, make this request before the Checkout button is tapped, e.g. when the screen is loaded.
     initialisePaymentSheet();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -141,61 +138,67 @@ const CheckoutScreen = () => {
   }
 
   return (
-    <>
-      {loadingOrder ? (
-        <View style={tailwind`h-full bg-white items-center justify-center`}>
-          <Text style={tailwind`font-bold text-lg w-3/4 text-center`}>{"Congratulations!\nPayment successfully done!"}</Text>
-          <Text style={tailwind`mt-4`}>Creating your order. please wait...</Text>
-          <Image source={require('../assets/images/loaging.gif')} style={tailwind`w-72 h-72`} />
-        </View>
-      ) : (
-        <>
-          <PaymentScreen>
-            <AppHead title={`Checkout`} />
-            <View style={tailwind`mt-5`}>
-              <PaymentButton
-                variant="primary"
-                loading={loading}
-                title={
-                  paymentMethod ? (
-                    <View style={styles.row}>
-                      <Image
-                        source={{
-                          uri: `data:image/png;base64,${paymentMethod?.image}`,
-                        }}
-                        style={styles.image}
-                      />
-                      <Text style={styles.text}>{paymentMethod?.label}</Text>
-                    </View>
-                  ) : (
-                    'Choose payment method'
-                  )
-                }
-                disabled={!paymentSheetEnabled}
-                onPress={choosePaymentOption}
-              />
-            </View>
+    // <View containerStyle={styles.container}>
+      <>
+        {loadingOrder ? (
+          <View style={styles.container}>
+            <Text style={tailwind`font-bold text-lg w-3/4 text-center`}>{"Congratulations!\nPayment successfully done!"}</Text>
+            <Text style={tailwind`mt-4`}>Création de votre commande. Veuillez patienter...</Text>
+            <Image source={require('../assets/images/loaging.gif')} style={tailwind`w-72 h-72`} />
+          </View>
+        ) : (
+          <>
+            <PaymentScreen>
+              <AppHead title={`Checkout`} />
+              <View style={styles.Checkout}>
+                <PaymentButton
+                  variant="primary"
+                  loading={loading}
+                  title={
+                    paymentMethod ? (
+                      <View style={styles.row}>
+                        <Image
+                          source={{
+                            uri: `data:image/png;base64,${paymentMethod?.image}`,
+                          }}
+                          style={styles.image}
+                        />
+                        <Text style={styles.text}>{paymentMethod?.label}</Text>
+                      </View>
+                    ) : (
+                      'Choisir le mode de paiement'
+                    )
+                  }
+                  disabled={!paymentSheetEnabled}
+                  onPress={choosePaymentOption}
+                />
+              </View>
 
-            <View style={styles.section}>
-              <PaymentButton
-                variant="primary"
-                loading={loading}
-                disabled={!paymentMethod || !paymentSheetEnabled}
-                title="Pay"
-                onPress={onPressBuy}
+              <View style={styles.section}>
+                <PaymentButton
+                  variant="primary"
+                  loading={loading}
+                  disabled={!paymentMethod || !paymentSheetEnabled}
+                  title="Pay"
+                  onPress={onPressBuy}
 
-              />
-            </View>
-          </PaymentScreen>
-        </>
-      )}
-    </>
+                />
+              </View>
+            </PaymentScreen>
+          </>
+        )}
+      </>
   );
 }
 
 const styles = StyleSheet.create({
-  flex: {
+  container:{
     flex:1,
+    marginTop:50,
+  },
+  Checkout: {
+    flex:1,
+    marginTop:50,
   },
   row: {
     flexDirection: 'row',
@@ -203,7 +206,7 @@ const styles = StyleSheet.create({
   },
   section: {
     flex:1,
-    marginTop: 20,
+    marginTop: 30,
   },
   title: {
     fontSize: 18,
