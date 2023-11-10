@@ -14,28 +14,26 @@ import tailwind from 'tailwind-react-native-classnames';
 const ValidationSchema = yup.object().shape({
   name: yup
     .string()
-    .min(3, ({ min }) => `Name must be at least ${min} characters`)
-    .max(50, ({ max }) => `Name must be less than ${max} characters`)
-    .required("Name is Required"),
+    .min(3, ({ min }) => `Nom et prénom devrait être minimum ${min} caractères`)
+    .max(50, ({ max }) => `Nom et prénom devrait être maximum ${max} caractères`)
+    .required("Nom et prénom obligatoire"),
   email: yup
     .string()
-    .email("Please enter a valid email")
-    .required("Email Address is Required"),
+    .email("Veuillez saisir une addresse mail valide")
+    .required("Email obligatoire"),
   password: yup
     .string()
-    .min(8, ({ min }) => `Password must be at least ${min} characters`)
-    .required("Password is required"),
+    .min(8, ({ min }) => `Mot de passe devrait être minimum ${min} caractères`)
+    .required("Mot de passe obligatoire"),
 });
 
 function SignupScreen({ navigation }) {
   const [authInitialized, setAuthInitialized] = useState(false);
 
   useEffect(() => {
-    // Check if Firebase auth is initialized
     if (auth) {
       setAuthInitialized(true);
     } else {
-      // Firebase auth is not yet initialized
       console.log("Firebase auth is not ready");
     }
   }, []);
@@ -51,10 +49,8 @@ function SignupScreen({ navigation }) {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // After successful signup, update user's profile with name
       await updateProfile(user, { displayName: name });
 
-      // Save user data to Firestore
       const usersRef = collection(firestore, "users");
       const userDoc = doc(usersRef, user.uid);
 
@@ -66,11 +62,11 @@ function SignupScreen({ navigation }) {
       console.log("User data saved to Firestore");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        Alert.alert("Error", "That email address is already in use!");
+        Alert.alert("Error", "L'addresse est déjà utilisée!");
       } else if (error.code === "auth/invalid-email") {
-        Alert.alert("Error", "That email address is invalid!");
+        Alert.alert("Error", "L'addresse mail est invalide!");
       }
-      Alert.alert("ERROR:", error.message);
+      Alert.alert("Erreur:", error.message);
     }
   };
 
@@ -81,7 +77,7 @@ function SignupScreen({ navigation }) {
           <Image style={styles.logo} source={require("../assets/logo.png")} />
         </View>
         <Text style={styles.wellcomeTo}>
-          Join Pay<Text style={styles.brand}>Food</Text>
+          Rejoignez Pay<Text style={styles.brand}>Food</Text>
         </Text>
         <View style={styles.form}>
           <AppForm
@@ -91,30 +87,30 @@ function SignupScreen({ navigation }) {
           >
             <AppFormFeilds
               name="name"
-              placeholder="Your name"
+              placeholder="Nom et prénom"
             />
             <AppFormFeilds
               name="email"
-              placeholder="Your email"
+              placeholder="Email"
               keyboardType="email-address"
             />
             <AppFormFeilds
               name="password"
-              placeholder="Password"
+              placeholder="Mot de passe"
               autoCompleteType="off"
               password={true}
             />
-            <AppSubmitButton title="Sign Up" />
+            <AppSubmitButton title="S'inscrire" />
           </AppForm>
         </View>
 
         <Text style={styles.join}>
-          Already a member?{" "}
+          Vous avez déjà un compte?{" "}
           <Text
             onPress={() => navigation.navigate("UserLogin")}
             style={{ color: colors.primary }}
           >
-            Log In
+            Se connecter
           </Text>
         </Text>
       </View>
@@ -155,7 +151,6 @@ const styles = StyleSheet.create({
   join: {
     marginTop: 16,
     textAlign: "center",
-    color: colors.black,
   },
   or: {
     color: colors.gray,

@@ -12,12 +12,12 @@ import tailwind from 'tailwind-react-native-classnames';
 const loginValidationSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Please enter valid email")
-    .required("Email Address is Required"),
+    .email("Veuillez saisir une addresse mail valide")
+    .required("Email obligatoire"),
   password: yup
     .string()
-    .min(8, ({ min }) => `Password must be at least ${min} characters`)
-    .required("Password is required"),
+    .min(8, ({ min }) => `Mot de passe devrait être minimum ${min} caractères`)
+    .required("Mot de passe obligatoire"),
 });
 
 function LoginScreenUser({ navigation }) {
@@ -28,12 +28,12 @@ function LoginScreenUser({ navigation }) {
     signInWithEmailAndPassword(auth, email, password)
       .catch((error) => {
         if (error.code === "auth/invalid-password") {
-          Alert.alert("Error", "Invalid password!")
+          Alert.alert("Erreur", "Mot de passe invalide !")
         }
         if (error.code === "auth/invalid-email") {
-          Alert.alert("Error", "That email address is invalid!")
+          Alert.alert("Erreur", "Email invalide !")
         }
-        Alert.alert('ERROR: ', error.message);
+        Alert.alert('Erreur: ', error.message);
       });
   };
 
@@ -44,7 +44,7 @@ function LoginScreenUser({ navigation }) {
           <Image style={styles.logo} source={require("../assets/logo.png")} />
         </View>
         <Text style={styles.wellcomeTo}>
-          Login to Pay<Text style={styles.brand}>Food</Text>
+          Se connecter à Pay<Text style={styles.brand}>Food</Text>
         </Text>
         <View style={styles.form}>
           <AppForm
@@ -54,26 +54,26 @@ function LoginScreenUser({ navigation }) {
           >
             <AppFormFeilds
               name="email"
-              placeholder="Your email"
+              placeholder="Email"
               keyboardType="email-address"
             />
             <AppFormFeilds
               name="password"
-              placeholder="Password"
+              placeholder="Mot de passe"
               autoCompleteType="off"
               password={true}
             />
-            <AppSubmitButton title="Login" />
+            <AppSubmitButton title="Se connecter" />
           </AppForm>
         </View>
 
         <Text style={styles.join}>
-          Not a member?{" "}
+          Vous n'avez pas encore de compte ?{" "}
           <Text
             onPress={() => navigation.navigate("Signup")}
             style={{ color: colors.primary }}
           >
-            Sign Up
+            S'inscrire
           </Text>
         </Text>
       </View>
@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
   join: {
     marginTop: 16,
     textAlign: "center",
-    color: colors.black,
   },
   or: {
     color: colors.gray,
