@@ -13,7 +13,7 @@ function JoinScreen({ navigation }) {
                 <Image style={styles.logo} source={require("../assets/logo.png")} />
                 <View style={styles.content}>
                     <Text style={styles.title}>Payfood</Text>
-                    <Text style={styles.subTitle}>Ne vous préoccupez plus de l’addition.</Text>=======
+                    <Text style={styles.subTitle}>Ne vous préoccupez plus de l’addition.</Text>
                     <AppButton title="Allons-y !" onPress={() => navigation.navigate("Signup")} />
                 </View>
             </ImageBackground>

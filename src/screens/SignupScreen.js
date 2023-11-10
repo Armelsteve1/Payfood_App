@@ -87,7 +87,7 @@ function SignupScreen({ navigation }) {
           >
             <AppFormFeilds
               name="name"
-              placeholder="Nom et prénom"
+              placeholder="pseudo"
             />
             <AppFormFeilds
               name="email"

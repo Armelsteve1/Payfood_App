@@ -17,7 +17,7 @@ const CartScreen = () => {
 
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
-            <AppHead title={`Your cart (${getAllItems.length})`} icon="basket-outline" />
+            <AppHead title={`Votre Panier (${getAllItems.length})`} icon="basket-outline" />
             <View style={tailwind`flex-1`}>
                 <CartItems />
             </View>
@@ -25,10 +25,10 @@ const CartScreen = () => {
                 <View style={tailwind`flex-row items-center px-5 pb-5`}>
                     <View style={styles.left}>
                         <Text style={styles.total}>Total</Text>
-                        <Text style={styles.totalAmount}>${totalPrice}</Text>
+                        <Text style={styles.totalAmount}>€{totalPrice}</Text>
                     </View>
                     <View style={styles.right}>
-                        <AppButton title="Checkout" onPress={() => setModalVisible(true)} color="#FF3C6E" />
+                        <AppButton title="Payer" onPress={() => setModalVisible(true)} color="#FF3C6E" />
                     </View>
                 </View>
             )}

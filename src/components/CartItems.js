@@ -30,7 +30,7 @@ const CartItems = () => {
 
     return (
         <ScrollView style={tailwind`mx-4 mt-3`} showsVerticalScrollIndicator={false}>
-            {!allCartItems.length && <Text style={tailwind`text-center text-black`}>No cart items!</Text>}
+            {!allCartItems.length && <Text style={tailwind`text-center text-black`}>Pas d'articles dans le panier !</Text>}
             {allCartItems.map(item => (
                 <View key={item.resName} style={tailwind`mb-4`}>
                     <View style={tailwind`mb-4 relative justify-center`}>
@@ -48,7 +48,7 @@ const CartItems = () => {
                                 />
                                 <View style={tailwind`flex-1 pl-2`}>
                                     <Text style={[tailwind`text-gray-900 font-bold mb-1`, { fontSize: 16 }]}>{food.title}</Text>
-                                    <Text style={tailwind`text-gray-800 text-xs`}>${food.price}</Text>
+                                    <Text style={tailwind`text-gray-800 text-xs`}>€{food.price}</Text>
                                     <Text style={tailwind`text-gray-600 text-xs`}>{food.description}</Text>
                                 </View>
                             </View>

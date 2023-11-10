@@ -9,7 +9,7 @@ function ImageInput({imageUri, onChangeImage}) {
     const requestPermissions = async () => {
         const { status  } = ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status === 'denied') {
-          alert('Sorry, we need camera roll permissions to make this work!');
+          alert('Désolé, nous avons besoin des autorisations du rouleau de l'/'appareil photo pour que cela fonctionne !');
         }
     }
 
@@ -33,7 +33,7 @@ function ImageInput({imageUri, onChangeImage}) {
 
     const handlePress = () => {
         if(!imageUri) selectImage();
-        else Alert.alert('Delete', 'Are you sure you want to delete this image?', [
+        else Alert.alert('Delete', 'Êtes-vous sûr de vouloir supprimer cette image ?', [
             {text: 'yes', onPress: () => onChangeImage(null)},
             {text: 'no'}
         ])

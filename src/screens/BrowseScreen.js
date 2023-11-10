@@ -12,9 +12,9 @@ const BrowseScreen = () => {
             <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
                 <View style={tailwind`mt-2 mx-4 mb-1 relative justify-center`}>
                     <Ionicons name="search-sharp" size={20} color="#B1B1B3" style={tailwind`absolute left-4 z-10 self-center`} />
-                    <TextInput style={[tailwind`rounded-full py-2 px-5 pl-10 bg-gray-100`, styles.input]} placeholder="Search anything" />
+                    <TextInput style={[tailwind`rounded-full py-2 px-5 pl-10 bg-gray-100`, styles.input]} placeholder="Recherche" />
                 </View>
-                <Text style={tailwind`text-lg mt-2 ml-4`}>Top meals</Text>
+                <Text style={tailwind`text-lg mt-2 ml-4`}>Repas du jour</Text>
                 <View style={tailwind`flex-row mx-2 flex-wrap justify-between`}>
                     {meals?.map(({ title, image, id }) => (
                         <TouchableOpacity key={id} style={tailwind`w-1/2 my-2 px-2`}>

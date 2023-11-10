@@ -17,19 +17,19 @@ const CartScreen = () => {
 
     return (
         <Screen style={tailwind`flex-1 bg-white`}>
-            <AppHead title={`Your cart (${getAllItems.length})`} icon="basket-outline" />
+            <AppHead title={`Votre panier (${getAllItems.length})`} icon="basket-outline" />
             <View style={tailwind`flex-1`}>
                 <CartItems />
             </View>
             {!!getAllItems.length && (
                 <View style={tailwind`flex-row items-center px-5 pb-5`}>
-                    <View style={styles.left}>
-                        <Text style={styles.total}>Total</Text>
-                        <Text style={styles.totalAmount}>${totalPrice}</Text>
-                    </View>
-                    <View style={styles.right}>
-                        <AppButton title="Checkout" onPress={() => setModalVisible(true)} color="black" />
-                    </View>
+                        <View style={styles.left}>
+                            <Text style={styles.total}>Total</Text>
+                            <Text style={styles.totalAmount}>€{totalPrice}</Text>
+                        </View>
+                        <View style={styles.right}>
+                            <AppButton title="Payer" onPress={() => setModalVisible(true)} color="black" />
+                        </View>
                 </View>
             )}
             <Modal visible={modalVisible} animationType="slide" transparent={true}>
@@ -41,10 +41,7 @@ const CartScreen = () => {
 
 const styles = StyleSheet.create({
     left: {
-        marginRight: 20
-    },
-    right: {
-        flex: 1
+        marginRight: 20,
     },
     total: {
         fontSize: 14,
@@ -52,6 +49,9 @@ const styles = StyleSheet.create({
     },
     totalAmount: {
         fontSize: 23,
+    },
+    right:{
+        flex:1,
     },
 })
 
