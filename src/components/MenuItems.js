@@ -64,7 +64,7 @@ const MenuItems = ({ resName, resImage }) => {
                         )}
                         <View style={tailwind`flex-1 pl-2`}>
                             <Text style={[tailwind`text-gray-900 font-bold mb-1`, { fontSize: 16 }]}>{title}</Text>
-                            <Text style={tailwind`text-gray-800 text-xs`}>${price}</Text>
+                            <Text style={tailwind`text-gray-800 text-xs`}>{price}€</Text>
                             <Text style={tailwind`text-gray-600 text-xs`}>{description}</Text>
                         </View>
                     </View>

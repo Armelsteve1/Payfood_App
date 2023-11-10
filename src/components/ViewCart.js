@@ -10,14 +10,14 @@ const ViewCart = ({ total, count }) => {
         <>
         {!!count && (
           <TouchableOpacity
-            onPress={() => navigation.navigate("Cart")}
+            onPress={() => navigation.navigate("Panier")}
             style={[
               tailwind`bg-black absolute bottom-4 self-center py-3 px-12 rounded-full z-50`,
               { backgroundColor: "#FF3C6E" }
             ]}
           >
             <Text style={tailwind`text-white text-sm`}>
-              View Cart • ${total} ({count})
+            Voir le panier €{total} ({count})
             </Text>
           </TouchableOpacity>
         )}

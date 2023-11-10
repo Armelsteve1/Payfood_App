@@ -50,7 +50,7 @@ const SearchBar = ({ setCity, city }) => {
                 renderRightButton={() => (
                     <TouchableOpacity style={tailwind`self-center ml-3 flex-row items-center bg-white py-2 px-3 rounded-full mr-3`}>
                         <MaterialCommunityIcons name="clock-time-four" size={13} color="#FF3C6E" />
-                        <Text style={tailwind`ml-1`}>Search</Text>
+                        <Text style={tailwind`ml-1`}>Recherche</Text>
                     </TouchableOpacity>
                 )}
             />
