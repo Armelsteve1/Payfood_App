@@ -6,6 +6,7 @@ import CheckoutScreen from '../screens/CheckoutScreen';
 import MainTabNavigator from './MainTabNavigator';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import AccountSettingsScreen from '../screens/AccountSettingsScreen';
+import VouchersScreen from '../screens/VouchersScreen';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ export default function HomeNavigator() {
             <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
             <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
             <Stack.Screen name="AccountSettingsScreen" component={AccountSettingsScreen} />
+            <Stack.Screen name="VouchersScreen" component={VouchersScreen} />
 
         </Stack.Navigator>
     )

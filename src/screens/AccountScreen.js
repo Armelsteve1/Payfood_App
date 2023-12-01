@@ -105,6 +105,11 @@ const AccountScreen = ({ navigation }) => {
                         text="Gérer les paramètres de mon compte"
                         Icon={() => <Ionicons name="build" size={24} color={colors.primary} onPress={() => navigation.navigate('AccountSettingsScreen')} />}
                     />
+                    <SavedPlaces
+                        title="Mes promotions"
+                        text="Décrouvrir les promotions disponibles"
+                        Icon={() => <Ionicons name="bookmark" size={24} color={colors.primary} onPress={() => navigation.navigate('VouchersScreen')} />}
+                    />
                 </View>
                 <View style={tailwind`mx-4 border-t border-t-2 mt-5 border-gray-100`}>
                     <Text style={tailwind`text-gray-800 mt-2 text-lg`}>Autres options</Text>
