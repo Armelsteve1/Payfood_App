@@ -138,10 +138,10 @@ const CheckoutScreen = () => {
   }
 
   return (
-    // <View containerStyle={styles.container}>
+    <View style={styles.container}>
       <>
         {loadingOrder ? (
-          <View style={styles.container}>
+          <View>
             <Text style={tailwind`font-bold text-lg w-3/4 text-center`}>{"Congratulations!\nPayment successfully done!"}</Text>
             <Text style={tailwind`mt-4`}>Création de votre commande. Veuillez patienter...</Text>
             <Image source={require('../assets/images/loaging.gif')} style={tailwind`w-72 h-72`} />
@@ -188,13 +188,15 @@ const CheckoutScreen = () => {
           </>
         )}
       </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    marginTop:50,
+  container: {
+    flex: 1,
+    paddingTop: 50,
+    backgroundColor: colors.white,
   },
   Checkout: {
     flex:1,
