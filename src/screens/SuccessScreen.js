@@ -13,10 +13,10 @@ function SuccessScreen() {
         <Screen style={styles.container}>
             <View style={styles.content}>
                 <Image source={ require('../assets/images/blink.gif') } style={tailwind`w-72 h-72`} />
-                <Text style={styles.title}>Congratulations!!!</Text>
-                <Text style={styles.text}>Your order have been taken successfully!</Text>
+                <Text style={styles.title}>Félicitations !!!</Text>
+                <Text style={styles.text}>Votre commande a été prise en compte avec succès !</Text>
                 <View style={styles.buttons}>
-                    <AppButton onPress={() => navigation.navigate('Accueil')} title="Continue shopping" color="black" />
+                    <AppButton onPress={() => navigation.navigate('Accueil')} title="Continuez" color="black" />
                 </View>
             </View>
         </Screen>

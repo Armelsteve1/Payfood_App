@@ -45,7 +45,10 @@ const MainTabNavigator = () => {
             />
             <Tab.Screen name="Panier" component={CartScreen}
                 options={({ navigation }) => ({
-                    tabBarButton: () => <TabCartButton onPress={() => navigation.navigate('Panier')} />
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="md-card" color={color} size={size} />
+                    )
+                    // tabBarButton: () => <TabCartButton onPress={() => navigation.navigate('Panier')} />
                 })}
             />
             <Tab.Screen name="Portefeuille" component={WalletScreen}
