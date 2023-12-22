@@ -1,29 +1,37 @@
 {
   "expo": {
-    "name": "payfood_app_mob",
+    "name": "payfood",
     "slug": "payfood_app_mob",
+    "scheme": "payfood",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    // "icon": "./assets/logo.jpg",
     "userInterfaceStyle": "light",
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.armel1.payfood_app_mob",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
-    "web": {
-      "favicon": "./assets/logo.png"
+    "extra": {
+      "eas": {
+        "projectId": "b194a850-3bd2-427c-99a1-797fd264898a"
+      }
     }
   }
 }
