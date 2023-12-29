@@ -1,20 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { ScrollView, ActivityIndicator } from 'react-native';
-import { HeaderTabs, SearchBar, Categories, RestaurantItem } from '../../src/components';
-import { Screen } from '../styles';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, Alert, ActivityIndicator } from 'react-native';
+import HeaderTabs from '../components/HeaderTabs';
+import Screen from '../components/Screen'
+import Categories from '../components/Categories'
+import SearchBar from '../components/SearchBar'
+import RestaurantItem from '../components/RestaurantItem'
+import tailwind from 'tailwind-react-native-classnames';
+import colors from '../configs/colors'
+
+const YELP_API_KEY = "";
 
 const HomeScreen = () => {
-    const [restaurantData, setRestaurantData] = useState([]);
-    const [city, setCity] = useState("Paris");
+    const [restaurantData, setRestaurantData] = useState([])
+    const [city, setCity] = useState("Paris")
     const [activeTab, setActiveTab] = useState("Delivery");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const getRestaurantsFromYelp = () => {
         setLoading(true);
-        fetch('https://arf3k5x9o1.execute-api.eu-north-1.amazonaws.com/items')
+        const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
+
+        const apiOptions = {
+            headers: {
+                Authorization: `Bearer ${YELP_API_KEY}`,
+            },
+        };
+
+        fetch(yelpUrl, apiOptions)
             .then(response => response.json())
             .then(data => {
-                setRestaurantData(data.restaurantItems);
+                setRestaurantData(data.businesses);
                 setLoading(false);
             })
             .catch(error => {
@@ -28,19 +43,15 @@ const HomeScreen = () => {
     }, []);
 
     return (
-        <Screen>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-                <SearchBar cityHandler={setCity} />
+        <Screen style={tailwind`bg-white flex-1`}>
+            <SearchBar setCity={setCity} city={city} />
+            <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
                 <Categories />
-                {loading ? (
-                    <ActivityIndicator size="large" color="#0000ff" />
-                ) : (
-                    <RestaurantItem restaurantData={restaurantData} />
-                )}
+                {loading && <ActivityIndicator size="large" color={colors.primary} style={tailwind`mt-2 mb-6`} />}
+                <RestaurantItem restaurantData={restaurantData} />
             </ScrollView>
         </Screen>
     );
-};
+}
 
 export default HomeScreen;

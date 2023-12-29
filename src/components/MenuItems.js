@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
-import { foods } from '../data/foodsData'
 import tailwind from 'tailwind-react-native-classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems, selectTotalPrice, updateBusket } from '../redux/slices/basketSlice';
@@ -8,9 +7,17 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import colors from '../configs/colors';
 
 const MenuItems = ({ resName, resImage }) => {
+    const [foods, setFoods] = useState([]); // Nouvel état pour stocker les données de l'API
     const cartItems = useSelector(selectCartItems)
     const dispatch = useDispatch()
-    
+
+    useEffect(() => {
+        fetch('https://qxqiytxy36.execute-api.eu-north-1.amazonaws.com/items/rest01/menu01')
+            .then(response => response.json())
+            .then(data => setFoods(data))
+            .catch(error => console.error('Il y avait une erreur lors de la récupération des données de l\'API', error));
+    }, []);
+
     const match = id => {
         const resIndex = cartItems.findIndex(item => item.resName === resName)
         if (resIndex >= 0) {
