@@ -1,29 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import tailwind from 'tailwind-react-native-classnames';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
-
-const RestaurantItem = ({ restaurantData }) => {
-    const navigation = useNavigation()
-
-    const handlePress = (item) => {
-        navigation.navigate("DetailsScreen", {
-            item: {...item}
-        })
-    }
-
-return (
-    <View>
-        {restaurantData?.map((item, index) => (
-            <RestaurantItemCard key={index} item={item} onPress={() => handlePress(item)} />
-        ))}
-    </View>
-);
-}
-
-export default RestaurantItem;
 
 const RestaurantItemCard = ({ item, onPress }) => {
     const [loved, setLoved] = useState(false)
@@ -52,3 +32,33 @@ const RestaurantItemCard = ({ item, onPress }) => {
         </TouchableOpacity>
     )
 }
+
+const RestaurantItem = () => {
+    const [restaurantData, setRestaurantData] = useState([]);
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        fetch('https://arf3k5x9o1.execute-api.eu-north-1.amazonaws.com/items')
+            .then(response => response.json())
+            .then(data => setRestaurantData(data))
+            .catch((error) => {
+                console.error('Erreur:', error);
+            });
+    }, []);
+
+    const handlePress = (item) => {
+        navigation.navigate("DetailsScreen", {
+            item: {...item}
+        })
+    }
+
+    return (
+        <View>
+            {Array.isArray(restaurantData) && restaurantData.map((item, index) => (
+                <RestaurantItemCard key={index} item={item} onPress={() => handlePress(item)} />
+            ))}
+        </View>
+    );
+}
+
+export default RestaurantItem;

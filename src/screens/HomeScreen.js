@@ -1,61 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, Alert, ActivityIndicator } from 'react-native';
-import HeaderTabs from '../components/HeaderTabs';
-import Screen from '../components/Screen'
-import Categories from '../components/Categories'
-import SearchBar from '../components/SearchBar'
-import RestaurantItem from '../components/RestaurantItem'
-import tailwind from 'tailwind-react-native-classnames';
-import { localRestaurants } from '../data/localRestaurants';
-import colors from '../configs/colors'
-
-const YELP_API_KEY = "";
+import React, { useState, useEffect } from 'react';
+import { ScrollView, ActivityIndicator } from 'react-native';
+import { HeaderTabs, SearchBar, Categories, RestaurantItem } from '../../src/components';
+import { Screen } from '../styles';
 
 const HomeScreen = () => {
-    const [restaurantData, setRestaurantData] = useState(localRestaurants)
-    const [city, setCity] = useState("Paris")
+    const [restaurantData, setRestaurantData] = useState([]);
+    const [city, setCity] = useState("Paris");
     const [activeTab, setActiveTab] = useState("Delivery");
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const getRestaurantsFromYelp = () => {
-        const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
-
-        const apiOptions = {
-            headers: {
-                Authorization: `Bearer ${YELP_API_KEY}`,
-            },
-        };
-        setLoading(true)
-        return fetch(yelpUrl, apiOptions)
-            .then((res) => res.json())
-            .then((json) => {
-                setLoading(false)
-                if (json.error) return Alert.alert('Sorry', json.error.description);
-                setRestaurantData(
-                    json?.businesses?.filter((business) =>
-                        business.transactions.includes(activeTab.toLowerCase())
-                    )
-                )
+        setLoading(true);
+        fetch('https://arf3k5x9o1.execute-api.eu-north-1.amazonaws.com/items')
+            .then(response => response.json())
+            .then(data => {
+                setRestaurantData(data.restaurantItems);
+                setLoading(false);
             })
-            .catch((err) => console.log(err));
+            .catch(error => {
+                console.error(error);
+                setLoading(false);
+            });
     };
 
     useEffect(() => {
-        return // Remove return after adding Yelp API key
         getRestaurantsFromYelp();
-    }, [city, activeTab]);
-
+    }, []);
 
     return (
-        <Screen style={tailwind`bg-white flex-1`}>
-            <SearchBar setCity={setCity} city={city} />
-            <ScrollView style={tailwind`flex-1`} showsVerticalScrollIndicator={false}>
+        <Screen>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+                <SearchBar cityHandler={setCity} />
                 <Categories />
-                {loading && <ActivityIndicator size="large" color={colors.primary} style={tailwind`mt-2 mb-6`} />}
-                <RestaurantItem restaurantData={restaurantData} />
+                {loading ? (
+                    <ActivityIndicator size="large" color="#0000ff" />
+                ) : (
+                    <RestaurantItem restaurantData={restaurantData} />
+                )}
             </ScrollView>
         </Screen>
     );
-}
+};
 
 export default HomeScreen;
