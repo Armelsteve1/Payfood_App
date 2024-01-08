@@ -48,7 +48,7 @@ const RestaurantItem = () => {
 
     const handlePress = (item) => {
         navigation.navigate("DetailsScreen", {
-            item: {...item}
+            item: {...item},
         })
     }
 

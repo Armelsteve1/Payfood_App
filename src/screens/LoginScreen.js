@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Image, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import AppForm from "../components/forms/AppForm";
 import Screen from "../components/Screen";
 import colors from "../configs/colors";
@@ -7,7 +7,6 @@ import * as yup from "yup";
 import AppFormFeilds from "../components/forms/AppFormFeilds";
 import AppSubmitButton from "../components/forms/AppSubmitButton";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import tailwind from 'tailwind-react-native-classnames';
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -16,7 +15,6 @@ const loginValidationSchema = yup.object().shape({
     .required("Email obligatoire"),
   password: yup
     .string()
-    .min(8, ({ min }) => `Mot de passe devrait être minimum ${min} caractères`)
     .required("Mot de passe obligatoire"),
 });
 
@@ -27,12 +25,6 @@ function LoginScreenUser({ navigation }) {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .catch((error) => {
-        if (error.code === "auth/invalid-password") {
-          Alert.alert("Erreur", "Mot de passe invalide !")
-        }
-        if (error.code === "auth/invalid-email") {
-          Alert.alert("Erreur", "Email invalide !")
-        }
         Alert.alert('Erreur: ', error.message);
       });
   };
@@ -40,9 +32,7 @@ function LoginScreenUser({ navigation }) {
   return (
     <Screen style={styles.container}>
       <View style={styles.wrapper}>
-        <View style={tailwind`py-4 rounded-2xl`}>
-          <Image style={styles.logo} source={require("../assets/logo.png")} />
-        </View>
+        {/* <Image style={styles.logo} source={require("../assets/logo.png")} /> */}
         <Text style={styles.wellcomeTo}>
           Se connecter à Pay<Text style={styles.brand}>Food</Text>
         </Text>

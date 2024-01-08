@@ -14,7 +14,8 @@ import { useSelector } from 'react-redux';
 
 const DetailsScreen = ({ route, navigation }) => {
     const [mapActive, setMapActive] = useState(false)
-    const { categories, coordinates, image_url, name, price, rating, review_count } = route?.params?.item
+    const { categories, coordinates, image_url, name, price, rating, review_count, id, menu_id } = route?.params?.item
+    console.log(id, menu_id, 'menu')
     const totalPrice = useSelector(selectTotalPrice)
     const getAllItems = useSelector(selectTotalItems)
 
@@ -61,7 +62,7 @@ const DetailsScreen = ({ route, navigation }) => {
                             <Text key={index} style={tailwind`text-xs text-gray-700`}><Text style={{ color: colors.primary }}></Text> {title}</Text>
                         ))}
                     </View> */}
-                    <MenuItems resName={name} resImage={image_url} />
+                   <MenuItems resName={name} resImage={image_url} id={id} menu_id={menu_id} />
                 </View>
             </ScrollView>
             <ViewCart total={totalPrice} count={getAllItems.length} />

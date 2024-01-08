@@ -63,7 +63,6 @@ const CheckoutScreen = () => {
         applePay: false,
         merchantCountryCode: 'US',
         style: 'alwaysDark',
-        googlePay: false,
         testEnv: true,
       });
 
@@ -144,7 +143,7 @@ const CheckoutScreen = () => {
           <View>
             <Text style={tailwind`font-bold text-lg w-3/4 text-center`}>{"Congratulations!\nPayment successfully done!"}</Text>
             <Text style={tailwind`mt-4`}>Création de votre commande. Veuillez patienter...</Text>
-            <Image source={require('../assets/images/loaging.gif')} style={tailwind`w-72 h-72`} />
+            {/* <Image source={require('../assets/images/loaging.gif')} style={tailwind`w-72 h-72`} /> */}
           </View>
         ) : (
           <>
